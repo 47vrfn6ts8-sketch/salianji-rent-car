@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Salianji Rent Car | Makina me Qira në Tiranë</title>
+  <meta name="description" content="Salianji Rent Car - Makina premium me qira në Tiranë. BMW, Audi, Mercedes dhe makina të tjera.">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --black: #080808;
+      --dark: #111111;
+      --card: #171717;
+      --gold: #d4af37;
+      --gold-light: #f1d77a;
+      --white: #ffffff;
+      --gray: #a7a7a7;
+      --border: rgba(255,255,255,0.1);
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 14px;
+      color: #ddd;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .nav-button {
+      background: var(--gold);
+      color: #000;
+      padding: 10px 17px;
+      border-radius: 7px;
+      font-weight: 700;
+    }
+
+    .nav-button:hover {
+      background: var(--gold-light);
+      color: #000;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(0,0,0,0.70), rgba(0,0,0,0.88)),
+        radial-gradient(circle at 75% 40%, rgba(212,175,55,0.18), transparent 35%),
+        #080808;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.07);
+      filter: blur(90px);
+      right: -100px;
+      top: 150px;
+    }
+
+    .hero-content {
+      width: 1200px;
+      max-width: 100%;
+      margin: auto;
+      padding: 130px 25px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-small {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 82px);
+      line-height: 1.02;
+      max-width: 800px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: #ccc;
+      max-width: 620px;
+      font-size: 18px;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid var(--gold);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: white;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* ================= STATS ================= */
+
+    .stats {
+      background: #0e0e0e;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      gap: 20px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold);
+      font-size: 28px;
+    }
+
+    .stat span {
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    /* ================= GENERAL ================= */
+
+    section {
+      padding: 95px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title small {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-top: 8px;
+    }
+
+    .section-title p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 12px auto 0;
+    }
+
+    /* ================= CARS ================= */
+
+    #cars {
+      background: #0c0c0c;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .car-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .car-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(212,175,55,0.6);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    }
+
+    .car-image {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #202020, #090909);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .car-card:hover .car-image img {
+      transform: scale(1.05);
+    }
+
+    .car-placeholder {
+      font-size: 75px;
+      opacity: 0.7;
+    }
+
+    .car-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--gold);
+      color: #000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .car-info {
+      padding: 22px;
+    }
+
+    .car-info h3 {
+      font-size: 23px;
+      margin-bottom: 5px;
+    }
+
+    .car-info .model {
+      color: var(--gray);
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .car-specs {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 0;
+      margin-bottom: 18px;
+      color: #bbb;
+      font-size: 12px;
+    }
+
+    .price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price strong {
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    .price span {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .rent-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-box {
+      min-height: 400px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at center, rgba(212,175,55,0.15), transparent 45%),
+        #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+    }
+
+    .about-text small {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    .about-text h2 {
+      font-size: 42px;
+      margin: 12px 0 20px;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+
+    .features {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .feature {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #111;
+    }
+
+    .feature strong {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .feature span {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    /* ================= HOW ================= */
+
+    #services {
+      background: #0d0d0d;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* ================= BOOKING ================= */
+
+    #booking {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(212,175,55,0.09), transparent 40%),
+        #080808;
+    }
+
+    .booking-box {
+      max-width: 900px;
+      margin: auto;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 35px;
+    }
+
+    .booking-box h2 {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 32px;
+    }
+
+    .booking-box > p {
+      color: var(--gray);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      background: #191919;
+      border: 1px solid #303030;
+      border-radius: 7px;
+      color: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit {
+      grid-column: 1 / -1;
+      border: none;
+      padding: 15px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit:hover {
+      background: var(--gold-light);
+    }
+
+    /* ================= CONTACT ================= */
+
+    #contact {
+      background: #0e0e0e;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .contact-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .contact-card h3 {
+      margin-bottom: 5px;
+    }
+
+    .contact-card p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .contact-card a {
+      color: var(--gold);
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--border);
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    footer .logo {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* ================= WHATSAPP ================= */
+
+    .whatsapp {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      z-index: 999;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+
+    .whatsapp:hover {
+      transform: scale(1.1);
+    }
+
+    /* ================= POPUP ================= */
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .popup-content {
+      width: 100%;
+      max-width: 450px;
+      background: #151515;
+      border: 1px solid var(--gold);
+      border-radius: 14px;
+      padding: 30px;
+      position: relative;
+      text-align: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .popup-content h2 {
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .popup-content p {
+      color: #bbb;
+      margin-bottom: 20px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .menu-btn {
+        display: block;
+      }
+
+      nav {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        background: #0b0b0b;
+        border-bottom: 1px solid var(--border);
+        display: none;
+        flex-direction: column;
+        padding: 25px;
+        gap: 20px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cars-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .navbar {
+        padding: 0 17px;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      section {
+        padding: 70px 15px;
+      }
+
+      .hero-content {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section-title h2,
+      .about-text h2 {
+        font-size: 32px;
+      }
+
+      .cars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .booking-box {
+        padding: 22px;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full,
+      .submit {
+        grid-column: auto;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+    <div class="navbar">
+
+      <a href="#home" class="logo">
+        SALIANJI<span>RENT</span>
+      </a>
+
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+      <nav id="nav">
+        <a href="#home" onclick="closeMenu()">Kryefaqja</a>
+        <a href="#cars" onclick="closeMenu()">Makinat</a>
+        <a href="#about" onclick="closeMenu()">Rreth Nesh</a>
+        <a href="#services" onclick="closeMenu()">Shërbimi</a>
+        <a href="#booking" onclick="closeMenu()">Rezervo</a>
+        <a href="#contact" onclick="closeMenu()">Kontakt</a>
+        <a href="#booking" class="nav-button" onclick="closeMenu()">Rezervo Tani</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+
+  <main id="home">
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="hero-small">
+          Premium Car Rental • Tirana
+        </div>
+
+        <h1>
+          Udhëto me<br>
+          <span>stil.</span>
+        </h1>
+
+        <p>
+          Zgjidh makinën që të përshtatet dhe shijo një eksperiencë
+          premium me Salianji Rent Car.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#cars" class="btn btn-gold">
+            Shiko Makinat
+          </a>
+
+          <a href="#booking" class="btn btn-outline">
+            Rezervo Makinën
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+      <div class="stats-container">
+
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Automjete</span>
+        </div>
+
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>Mbështetje</span>
+        </div>
+
+        <div class="stat">
+          <strong>100%</strong>
+          <span>Siguri</span>
+        </div>
+
+        <div class="stat">
+          <strong>5★</strong>
+          <span>Shërbim Premium</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= CARS ================= -->
+
+    <section id="cars">
+
+      <div class="container">
+
+        <div class="section-title">
+          <small>Flota Jonë</small>
+          <h2>Zgjidh makinën tënde</h2>
+          <p>
+            Automjete të përzgjedhura për udhëtime biznesi,
+            pushime dhe çdo aventurë.
+          </p>
+        </div>
+
+        <div class="cars-grid">
+
+          <!-- CAR 1 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <!--
+                KËTU MUND TË VENDOSËSH FOTO TË VËRTETË.
+
+                Shembull:
+                <img src="images/bmw-x5.jpg" alt="BMW X5">
+              -->
+
+              <div class="car-placeholder">🚙</div>
+
+              <span class="car-tag">Premium</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>BMW X5</h3>
+
+              <div class="model">
+                2013 • 3.0 Diesel • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 5 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€80</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('BMW X5')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- CAR 2 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <div class="car-placeholder">🚘</div>
+
+              <span class="car-tag">Luxury</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>Audi Q7</h3>
+
+              <div class="model">
+                2013 • 3.0 TDI • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 7 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€85</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('Audi Q7')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- CAR 3 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <div class="car-placeholder">🚗</div>
+
+              <span class="car-tag">Business</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>Mercedes-Benz</h3>
+
+              <div class="model">
+                E-Class • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 5 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€75</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('Mercedes-Benz E-Class')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- CAR 4 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <div class="car-placeholder">🚙</div>
+
+              <span class="car-tag">SUV</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>BMW X3</h3>
+
+              <div class="model">
+                xDrive • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 5 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€65</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('BMW X3')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- CAR 5 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <div class="car-placeholder">🚘</div>
+
+              <span class="car-tag">Premium</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>Mercedes GLE</h3>
+
+              <div class="model">
+                4MATIC • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 5 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€100</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('Mercedes GLE')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- CAR 6 -->
+
+          <article class="car-card">
+
+            <div class="car-image">
+
+              <div class="car-placeholder">🏎️</div>
+
+              <span class="car-tag">Sport</span>
+
+            </div>
+
+            <div class="car-info">
+
+              <h3>BMW 5 Series</h3>
+
+              <div class="model">
+                M Sport • Automatic
+              </div>
+
+              <div class="car-specs">
+                <span>⚙️ Automatik</span>
+                <span>⛽ Diesel</span>
+                <span>👤 5 Persona</span>
+              </div>
+
+              <div class="price">
+                <div>
+                  <strong>€75</strong>
+                  <span>/ dita</span>
+                </div>
+
+                <button
+                  class="rent-btn"
+                  onclick="openBooking('BMW 5 Series')">
+                  Rezervo
+                </button>
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="about-box">
+            🚘
+          </div>
+
+          <div class="about-text">
+
+            <small>Salianji Rent Car</small>
+
+            <h2>Jo vetëm një makinë. Një eksperiencë.</h2>
+
+            <p>
+              Ne ofrojmë makina të mirëmbajtura dhe një shërbim
+              të thjeshtë, transparent dhe profesional për klientët tanë.
+            </p>
+
+            <p>
+              Që nga momenti i rezervimit deri në kthimin e automjetit,
+              synimi ynë është që udhëtimi juaj të jetë sa më komod.
+            </p>
+
+            <div class="features">
+
+              <div class="feature">
+                <strong>✓ Makina të pastra</strong>
+                <span>Të kontrolluara para çdo qiraje.</span>
+              </div>
+
+              <div class="feature">
+                <strong>✓ Çmime transparente</strong>
+                <span>Pa surpriza të panevojshme.</span>
+              </div>
+
+              <div class="feature">
+                <strong>✓ Rezervim i shpejtë</strong>
+                <span>Rezervo online në pak minuta.</span>
+              </div>
+
+              <div class="feature">
+                <strong>✓ Mbështetje</strong>
+                <span>Jemi në dispozicion për klientët.</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+
+    <section id="services">
+
+      <div class="container">
+
+        <div class="section-title">
+          <small>Si funksionon</small>
+          <h2>Rezervo në 3 hapa</h2>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Zgjidh makinën</h3>
+
+            <p>
+              Shiko flotën tonë dhe zgjidh automjetin
+              që përshtatet me nevojat e tua.
+            </p>
+
+          </div>
+
+          <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Dërgo kërkesën</h3>
+
+            <p>
+              Plotëso formularin e rezervimit me
+              datat dhe të dhënat e tua.
+            </p>
+
+          </div>
+
+          <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Merr makinën</h3>
+
+            <p>
+              Konfirmojmë rezervimin dhe organizojmë
+              dorëzimin e automjetit.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= BOOKING ================= -->
+
+    <section id="booking">
+
+      <div class="container">
+
+        <div class="booking-box">
+
+          <h2>Rezervo makinën</h2>
+
+          <p>
+            Plotëso formularin dhe do të kontaktojmë për konfirmim.
+          </p>
+
+          <form id="bookingForm">
+
+            <div class="form-group">
+              <label>Emri dhe Mbiemri</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Emri juaj"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Telefon</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="+355 6X XXX XXXX"
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Makina</label>
+
+              <select id="car" required>
+                <option value="">Zgjidh makinën</option>
+                <option>BMW X5</option>
+                <option>Audi Q7</option>
+                <option>Mercedes-Benz E-Class</option>
+                <option>BMW X3</option>
+                <option>Mercedes GLE</option>
+                <option>BMW 5 Series</option>
+              </select>
+
+            </div>
+
+            <div class="form-group">
+              <label>Data e marrjes</label>
+
+              <input
+                type="date"
+                id="pickup"
+                required>
+
+            </div>
+
+            <div class="form-group">
+              <label>Data e kthimit</label>
+
+              <input
+                type="date"
+                id="return"
+                required>
+
+            </div>
+
+            <div class="form-group">
+              <label>Vendi i marrjes</label>
+
+              <select id="location">
+                <option>Tiranë</option>
+                <option>Aeroporti i Rinasit</option>
+                <option>Fier</option>
+                <option>Durrës</option>
+                <option>Vlorë</option>
+              </select>
+
+            </div>
+
+            <div class="form-group full">
+
+              <label>Mesazh</label>
+
+              <textarea
+                id="message"
+                placeholder="Shkruani ndonjë kërkesë shtesë..."></textarea>
+
+            </div>
+
+            <button
+              type="submit"
+              class="submit">
+              Dërgo Rezervimin në WhatsApp
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <small>Na kontaktoni</small>
+
+          <h2>Jemi këtu për ju</h2>
+
+          <p>
+            Për rezervime ose pyetje, na kontaktoni direkt.
+          </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="contact-card">
+
+            <div class="contact-icon">📞</div>
+
+            <h3>Telefon</h3>
+
+            <p>
+              <a href="tel:+355690000000">
+                +355 69 000 0000
+              </a>
+            </p>
+
+          </div>
+
+          <div class="contact-card">
+
+            <div class="contact-icon">💬</div>
+
+            <h3>WhatsApp</h3>
+
+            <p>
+              <a
+                href="https://wa.me/355690000000"
+                target="_blank">
+                Na shkruaj në WhatsApp
+              </a>
+            </p>
+
+          </div>
+
+          <div class="contact-card">
+
+            <div class="contact-icon">📍</div>
+
+            <h3>Lokacioni</h3>
+
+            <p>
+              Tiranë, Shqipëri
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="logo">
+      SALIANJI<span>RENT</span>
+    </div>
+
+    <p>
+      © <span id="year"></span> Salianji Rent Car.
+      Të gjitha të drejtat e rezervuara.
+    </p>
+
+  </footer>
+
+  <!-- ================= WHATSAPP ================= -->
+
+  <a
+    class="whatsapp"
+    href="https://wa.me/355690000000"
+    target="_blank"
+    aria-label="WhatsApp">
+    💬
+  </a>
+
+  <!-- ================= POPUP ================= -->
+
+  <div class="popup" id="popup">
+
+    <div class="popup-content">
+
+      <button
+        class="close"
+        onclick="closePopup()">
+        ×
+      </button>
+
+      <h2>Rezervimi</h2>
+
+      <p id="popupText">
+        Plotëso formularin për të vazhduar.
+      </p>
+
+      <a
+        href="#booking"
+        class="btn btn-gold"
+        onclick="closePopup()">
+        Vazhdo
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    /* VITI AUTOMATIK */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* MENU MOBILE */
+
+    function toggleMenu() {
+
+      const nav = document.getElementById("nav");
+
+      nav.classList.toggle("active");
+
+    }
+
+
+    function closeMenu() {
+
+      document.getElementById("nav")
+        .classList.remove("active");
+
+    }
+
+
+    /* POPUP REZERVIMI */
+
+    function openBooking(carName) {
+
+      document.getElementById("car").value = carName;
+
+      document.getElementById("popupText").textContent =
+        "Ke zgjedhur " + carName +
+        ". Plotëso të dhënat për të bërë rezervimin.";
+
+      document.getElementById("popup")
+        .classList.add("active");
+
+    }
+
+
+    function closePopup() {
+
+      document.getElementById("popup")
+        .classList.remove("active");
+
+    }
+
+
+    /* MBYLL POPUP KUR KLIKON JASHTË */
+
+    document.getElementById("popup")
+      .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+          closePopup();
+        }
+
+      });
+
+
+    /* FORMULARI -> WHATSAPP */
+
+    document.getElementById("bookingForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name =
+          document.getElementById("name").value;
+
+        const phone =
+          document.getElementById("phone").value;
+
+        const car =
+          document.getElementById("car").value;
+
+        const pickup =
+          document.getElementById("pickup").value;
+
+        const returnDate =
+          document.getElementById("return").value;
+
+        const location =
+          document.getElementById("location").value;
+
+        const message =
+          document.getElementById("message").value;
+
+        const whatsappNumber = "355690000000";
+
+        const text =
+          "🚗 *REZERVIM SALIANJI RENT CAR*%0A%0A" +
+
+          "👤 Emri: " + encodeURIComponent(name) + "%0A" +
+
+          "📞 Telefon: " + encodeURIComponent(phone) + "%0A" +
+
+          "🚘 Makina: " + encodeURIComponent(car) + "%0A" +
+
+          "📅 Marrja: " + encodeURIComponent(pickup) + "%0A" +
+
+          "📅 Kthimi: " + encodeURIComponent(returnDate) + "%0A" +
+
+          "📍 Lokacioni: " + encodeURIComponent(location) + "%0A" +
+
+          "📝 Mesazh: " + encodeURIComponent(message);
+
+
+        const url =
+          "https://wa.me/" +
+          whatsappNumber +
+          "?text=" +
+          text;
+
+
+        window.open(url, "_blank");
+
+      });
+
+
+    /* DATA MINIMUM = SOT */
+
+    const today =
+      new Date().toISOString().split("T")[0];
+
+    document.getElementById("pickup").min = today;
+    document.getElementById("return").min = today;
+
+
+    /* KTHIMI NUK MUND TË JETË PARA MARRJES */
+
+    document.getElementById("pickup")
+      .addEventListener("change", function() {
+
+        document.getElementById("return").min =
+          this.value;
+
+      });
+
+  </script>
+
+</body>
+</html>
