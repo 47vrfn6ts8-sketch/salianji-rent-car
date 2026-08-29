@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salianji Rent Car</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+header {
+    background: #111;
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 14px;
+    font-size: 14px;
+}
+.hero {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 40px 20px;
+    background:
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+}
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+.hero p {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+section {
+    padding: 50px 5%;
+}
+section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.btn {
+    background: #111;
+    color: white;
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.hero .btn {
+    background: white;
+    color: #111;
+}
+.cars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.car {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,.12);
+}
+.car img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+.car-content {
+    padding: 18px;
+}
+.car-content h3 {
+    margin-bottom: 10px;
+}
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+.booking {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+}
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
+.booking button {
+    width: 100%;
+}
+.contact {
+    text-align: center;
+    line-height: 2;
+}
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+/* ADMIN MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.75);
+    overflow-y: auto;
+}
+.modal-box {
+    background: white;
+    width: 92%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 15px;
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: 18px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.auth {
+    max-width: 400px;
+    margin: auto;
+}
+.auth h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.auth button {
+    width: 100%;
+}
+.switch {
+    text-align: center;
+    margin-top: 18px;
+}
+.switch span {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.hidden {
+    display: none !important;
+}
+.admin {
+    display: none;
+}
+.admin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.admin-card {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.admin-card h3 {
+    margin-bottom: 15px;
+}
+.admin-car {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.delete {
+    background: #c62828;
+}
+.logout {
+    background: #555;
+}
+@media (max-width: 750px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+    nav a {
+        font-size: 12px;
+        margin-left: 6px;
+    }
+    .hero h1 {
+        font-size: 34px;
+    }
+    .cars {
+        grid-template-columns: 1fr;
+    }
+    .admin-car {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+🚗 Salianji Rent Car
+</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#cars">Makinat</a>
+<a href="#booking">Rezervim</a>
+<a href="#contact">Kontakt</a>
+<a href="#" onclick="openAdmin()">🔐 Admin</a>
+</nav>
+</header>
+<section class="hero" id="home">
+<div>
+<h1>Salianji Rent Car</h1>
+<p>
+Makina me qira në Shqipëri
+</p>
+<a href="#cars">
+<button class="btn">
+Shiko makinat
+</button>
+</a>
+</div>
+</section>
+<section id="cars">
+<h2>🚗 Makinat tona</h2>
+<div class="cars" id="carContainer">
+<div class="car">
+<img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80">
+<div class="car-content">
+<h3>BMW X5</h3>
+<p>Automatik • Diesel • SUV</p>
+<div class="price">
+€80 / ditë
+</div>
+<a href="#booking">
+<button class="btn">
+Rezervo
+</button>
+</a>
+</div>
+</div>
+<div class="car">
+<img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80">
+<div class="car-content">
+<h3>Audi Q7</h3>
+<p>Automatik • Diesel • SUV</p>
+<div class="price">
+€75 / ditë
+</div>
+<a href="#booking">
+<button class="btn">
+Rezervo
+</button>
+</a>
+</div>
+</div>
+<div class="car">
+<img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80">
+<div class="car-content">
+<h3>Mercedes-Benz</h3>
+<p>Automatik • Diesel</p>
+<div class="price">
+€65 / ditë
+</div>
+<a href="#booking">
+<button class="btn">
+Rezervo
+</button>
+</a>
+</div>
+</div>
+</div>
+</section>
+<section id="booking">
+<h2>📅 Rezervo makinën</h2>
+<div class="booking">
+<form onsubmit="sendBooking(event)">
+<label>Emri</label>
+<input
+id="bname"
+type="text"
+required
+>
+<label>Telefon</label>
+<input
+id="bphone"
+type="tel"
+required
+>
+<label>Makina</label>
+<select id="bcar">
+<option>BMW X5</option>
+<option>Audi Q7</option>
+<option>Mercedes-Benz</option>
+</select>
+<label>Data e marrjes</label>
+<input
+id="bstart"
+type="date"
+required
+>
+<label>Data e kthimit</label>
+<input
+id="bend"
+type="date"
+required
+>
+<button class="btn">
+Dërgo rezervimin
+</button>
+</form>
+</div>
+</section>
+<section id="contact">
+<h2>📞 Kontakt</h2>
+<div class="contact">
+<p>Telefon: +355 69 000 0000</p>
+<p>Tiranë, Shqipëri</p>
+<p>Email: info@salianjirentcar.com</p>
+</div>
+</section>
+<footer>
+© 2026 Salianji Rent Car
+</footer>
+<!-- ADMIN -->
+<div id="adminModal" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closeAdmin()">
+×
+</span>
+<!-- LOGIN -->
+<div id="loginBox" class="auth">
+<h2>
+🔐 Admin Login
+</h2>
+<input
+id="loginEmail"
+type="email"
+placeholder="Email"
+>
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+>
+<button
+class="btn"
+onclick="login()"
+>
+Hyr
+</button>
+<div class="switch">
+Nuk ke llogari?
+<span onclick="showRegister()">
+Regjistrohu
+</span>
+</div>
+</div>
+<!-- REGISTER -->
+<div id="registerBox" class="auth hidden">
+<h2>
+📝 Regjistro Admin
+</h2>
+<input
+id="regEmail"
+type="email"
+placeholder="Email"
+>
+<input
+id="regPassword"
+type="password"
+placeholder="Password"
+>
+<input
+id="regPassword2"
+type="password"
+placeholder="Përsërit password"
+>
+<button
+class="btn"
+onclick="registerAdmin()"
+>
+Regjistrohu
+</button>
+<div class="switch">
+Ke llogari?
+<span onclick="showLogin()">
+Hyr
+</span>
+</div>
+</div>
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin">
+<div class="admin-top">
+<h2>
+⚙️ Admin Panel
+</h2>
+<button
+class="btn logout"
+onclick="logout()"
+>
+Dil
+</button>
+</div>
+<div class="admin-card">
+<h3>
+📊 Dashboard
+</h3>
+<p>
+Makina:
+<strong id="carCount">
+3
+</strong>
+</p>
+<p>
+Rezervime:
+<strong id="bookingCount">
+0
+</strong>
+</p>
+</div>
+<div class="admin-card">
+<h3>
+➕ Shto makinë
+</h3>
+<input
+id="newName"
+type="text"
+placeholder="BMW X5 2013"
+>
+<input
+id="newPrice"
+type="number"
+placeholder="Çmimi € / ditë"
+>
+<input
+id="newImage"
+type="text"
+placeholder="URL e fotos"
+>
+<button
+class="btn"
+onclick="addCar()"
+>
+Shto makinën
+</button>
+</div>
+<div class="admin-card">
+<h3>
+🚗 Menaxho makinat
+</h3>
+<div id="adminCars">
+</div>
+</div>
+<div class="admin-card">
+<h3>
+📅 Rezervimet
+</h3>
+<div id="adminBookings">
+Nuk ka rezervime.
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+let cars = JSON.parse(
+localStorage.getItem("salianjiCars")
+) || [
+{
+name: "BMW X5",
+price: 80,
+image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+},
+{
+name: "Audi Q7",
+price: 75,
+image: "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80"
+},
+{
+name: "Mercedes-Benz",
+price: 65,
+image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+}
+];
+let bookings = JSON.parse(
+localStorage.getItem("salianjiBookings")
+) || [];
+function openAdmin() {
+document.getElementById("adminModal")
+.style.display = "block";
+showLogin();
+}
+function closeAdmin() {
+document.getElementById("adminModal")
+.style.display = "none";
+}
+function showLogin() {
+document.getElementById("loginBox")
+.classList.remove("hidden");
+document.getElementById("registerBox")
+.classList.add("hidden");
+document.getElementById("adminPanel")
+.style.display = "none";
+}
+function showRegister() {
+document.getElementById("loginBox")
+.classList.add("hidden");
+document.getElementById("registerBox")
+.classList.remove("hidden");
+document.getElementById("adminPanel")
+.style.display = "none";
+}
+function registerAdmin() {
+const email =
+document.getElementById("regEmail").value.trim();
+const password =
+document.getElementById("regPassword").value;
+const password2 =
+document.getElementById("regPassword2").value;
+if (!email || !password || !password2) {
+alert("Plotëso të gjitha fushat.");
+return;
+}
+if (password.length < 6) {
+alert(
+"Password duhet të ketë të paktën 6 karaktere."
+);
+return;
+}
+if (password !== password2) {
+alert(
+"Password-et nuk përputhen."
+);
+return;
+}
+localStorage.setItem(
+"salianjiAdmin",
+JSON.stringify({
+email: email,
+password: password
+})
+);
+alert(
+"Admin u regjistrua me sukses!"
+);
+showLogin();
+}
+function login() {
+const email =
+document.getElementById("loginEmail").value.trim();
+const password =
+document.getElementById("loginPassword").value;
+const admin =
+JSON.parse(
+localStorage.getItem("salianjiAdmin")
+);
+if (!admin) {
+alert(
+"Nuk ka Admin të regjistruar. Regjistrohu fillimisht."
+);
+showRegister();
+return;
+}
+if (
+email === admin.email &&
+password === admin.password
+) {
+showAdminPanel();
+} else {
+alert(
+"Email ose password i gabuar."
+);
+}
+}
+function showAdminPanel() {
+document.getElementById("loginBox")
+.classList.add("hidden");
+document.getElementById("registerBox")
+.classList.add("hidden");
+document.getElementById("adminPanel")
+.style.display = "block";
+displayAdminCars();
+displayBookings();
+}
+function logout() {
+showLogin();
+}
+function addCar() {
+const name =
+document.getElementById("newName").value.trim();
+const price =
+document.getElementById("newPrice").value;
+const image =
+document.getElementById("newImage").value.trim();
+if (!name || !price) {
+alert(
+"Vendos emrin dhe çmimin."
+);
+return;
+}
+cars.push({
+name: name,
+price: price,
+image:
+image ||
+"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"
+});
+localStorage.setItem(
+"salianjiCars",
+JSON.stringify(cars)
+);
+document.getElementById("newName").value = "";
+document.getElementById("newPrice").value = "";
+document.getElementById("newImage").value = "";
+displayAdminCars();
+displayWebsiteCars();
+alert(
+"Makina u shtua me sukses!"
+);
+}
+function displayAdminCars() {
+const box =
+document.getElementById("adminCars");
+box.innerHTML = "";
+cars.forEach(
+(car, index) => {
+box.innerHTML += `
+<div class="admin-car">
+<div>
+<strong>
+${car.name}
+</strong>
+<br>
+€${car.price} / ditë
+</div>
+<button
+class="btn delete"
+onclick="deleteCar(${index})"
+>
+Fshi
+</button>
+</div>
+`;
+}
+);
+document.getElementById("carCount")
+.innerText = cars.length;
+}
+function deleteCar(index) {
+if (
+!confirm(
+"A je i sigurt që do ta fshish këtë makinë?"
+)
+) {
+return;
+}
+cars.splice(index, 1);
+localStorage.setItem(
+"salianjiCars",
+JSON.stringify(cars)
+);
+displayAdminCars();
+displayWebsiteCars();
+}
+function displayWebsiteCars() {
+const box =
+document.getElementById("carContainer");
+box.innerHTML = "";
+cars.forEach(
+car => {
+box.innerHTML += `
+<div class="car">
+<img
+src="${car.image}"
+alt="${car.name}"
+>
+<div class="car-content">
+<h3>
+${car.name}
+</h3>
+<p>
+Automatik • Rent a Car
+</p>
+<div class="price">
+€${car.price} / ditë
+</div>
+<a href="#booking">
+<button class="btn">
+Rezervo
+</button>
+</a>
+</div>
+</div>
+`;
+}
+);
+}
+function sendBooking(event) {
+event.preventDefault();
+const booking = {
+name:
+document.getElementById("bname").value,
+phone:
+document.getElementById("bphone").value,
+car:
+document.getElementById("bcar").value,
+start:
+document.getElementById("bstart").value,
+end:
+document.getElementById("bend").value
+};
+bookings.push(booking);
+localStorage.setItem(
+"salianjiBookings",
+JSON.stringify(bookings)
+);
+alert(
+"Rezervimi u dërgua me sukses!"
+);
+event.target.reset();
+displayBookings();
+}
+function displayBookings() {
+const box =
+document.getElementById("adminBookings");
+document.getElementById("bookingCount")
+.innerText = bookings.length;
+if (bookings.length === 0) {
+box.innerHTML =
+"Nuk ka rezervime.";
+return;
+}
+box.innerHTML = "";
+bookings.forEach(
+booking => {
+box.innerHTML += `
+<div class="admin-card">
+<strong>
+${booking.name}
+</strong>
+<br>
+📞 ${booking.phone}
+<br>
+🚗 ${booking.car}
+<br>
+📅 ${booking.start}
+→
+${booking.end}
+</div>
+`;
+}
+);
+}
+displayWebsiteCars();
+displayBookings();
+window.onclick = function(event) {
+const modal =
+document.getElementById("adminModal");
+if (event.target === modal) {
+closeAdmin();
+}
+};
+</script>
+</body>
+</html>
