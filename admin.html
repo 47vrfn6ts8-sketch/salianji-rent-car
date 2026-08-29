@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Salianji Rent Car</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.panel h2 {
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
+
+button {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.delete {
+    background: #c62828;
+}
+
+@media(max-width:700px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚗 Salianji Rent Car</h1>
+    <p>Admin Panel</p>
+</header>
+
+<div class="container">
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Makina</h3>
+            <p id="carCount">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Rezervime</h3>
+            <p>0</p>
+        </div>
+
+        <div class="card">
+            <h3>Statusi</h3>
+            <p>Online</p>
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>➕ Shto makinë</h2>
+
+        <label>Marka dhe modeli</label>
+        <input id="carName" type="text"
+        placeholder="BMW X5 2013">
+
+        <label>Çmimi për ditë (€)</label>
+        <input id="carPrice" type="number"
+        placeholder="80">
+
+        <label>Viti</label>
+        <input id="carYear" type="number"
+        placeholder="2013">
+
+        <label>Karburanti</label>
+        <select id="carFuel">
+            <option>Diesel</option>
+            <option>Benzinë</option>
+            <option>Hybrid</option>
+            <option>Elektrike</option>
+        </select>
+
+        <button onclick="addCar()">Shto makinën</button>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>🚗 Makinat</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Makina</th>
+                    <th>Viti</th>
+                    <th>Çmimi</th>
+                    <th>Karburanti</th>
+                    <th>Veprim</th>
+                </tr>
+            </thead>
+
+            <tbody id="carList">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+let cars = JSON.parse(localStorage.getItem("salianjiCars")) || [];
+
+function displayCars() {
+
+    const list = document.getElementById("carList");
+
+    list.innerHTML = "";
+
+    cars.forEach((car, index) => {
+
+        list.innerHTML += `
+        <tr>
+            <td>${car.name}</td>
+            <td>${car.year}</td>
+            <td>€${car.price}</td>
+            <td>${car.fuel}</td>
+            <td>
+                <button class="delete"
+                onclick="deleteCar(${index})">
+                Fshi
+                </button>
+            </td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("carCount").innerText = cars.length;
+}
+
+function addCar() {
+
+    const name = document.getElementById("carName").value;
+    const price = document.getElementById("carPrice").value;
+    const year = document.getElementById("carYear").value;
+    const fuel = document.getElementById("carFuel").value;
+
+    if (!name || !price || !year) {
+        alert("Plotëso të gjitha fushat!");
+        return;
+    }
+
+    cars.push({
+        name: name,
+        price: price,
+        year: year,
+        fuel: fuel
+    });
+
+    localStorage.setItem(
+        "salianjiCars",
+        JSON.stringify(cars)
+    );
+
+    document.getElementById("carName").value = "";
+    document.getElementById("carPrice").value = "";
+    document.getElementById("carYear").value = "";
+
+    displayCars();
+
+    alert("Makina u shtua!");
+}
+
+function deleteCar(index) {
+
+    if (confirm("A je i sigurt që do ta fshish këtë makinë?")) {
+
+        cars.splice(index, 1);
+
+        localStorage.setItem(
+            "salianjiCars",
+            JSON.stringify(cars)
+        );
+
+        displayCars();
+    }
+}
+
+displayCars();
+
+</script>
+
+</body>
+</html>
