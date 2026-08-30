@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salianji Rent Car</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f5f7;color:#111}
+header{background:#050505;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
+.logo{font-size:24px;font-weight:800}.logo span{color:#d4af37}
+nav{display:flex;gap:10px;align-items:center}
+nav button,.lang{background:#191919;color:white;border:0;padding:9px 12px;border-radius:7px}
+button{cursor:pointer}
+.hero{min-height:480px;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:30px;background:linear-gradient(#0009,#0009),url("https://commons.wikimedia.org/wiki/Special:FilePath/BMW%20X5%20F15.jpg") center/cover}
+.hero h1{font-size:55px}.hero p{font-size:20px;margin:15px 0 25px}
+.btn{background:#d4af37;color:#111;border:0;padding:12px 18px;border-radius:8px;font-weight:bold}
+.container{width:92%;max-width:1400px;margin:40px auto}
+.title{text-align:center;font-size:32px;margin-bottom:25px}
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.filters button{background:white;border:1px solid #ddd;border-radius:20px;padding:10px 16px}
+.filters .active{background:#111;color:white}
+.cars{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:white;border-radius:15px;overflow:hidden;box-shadow:0 5px 20px #0001}
+.card>img{width:100%;height:220px;object-fit:cover}
+.body{padding:17px}.body h3{margin:5px 0}
+.badge{display:inline-block;padding:5px 8px;background:#e8f7ed;color:#17823b;border-radius:5px;font-size:12px}
+.price{font-size:22px;font-weight:bold;margin:12px 0}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:7px;font-size:13px;color:#555;margin:12px 0}
+.actions{display:flex;gap:8px}.actions>*{flex:1}
+.dark{background:#111;color:white;border:0;padding:11px;border-radius:8px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:4000;padding:25px;overflow:auto}
+.modalbox{background:white;max-width:900px;margin:auto;border-radius:15px;padding:25px;position:relative}
+.close{position:absolute;right:18px;top:12px;font-size:30px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}
+.gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px}
+.form{display:grid;gap:12px}.form input,.form select,.form textarea{padding:12px;border:1px solid #ddd;border-radius:8px;width:100%}
+footer{background:#050505;color:white;text-align:center;padding:40px;margin-top:60px}
+/* ADMIN */
+.admin{display:none;position:fixed;inset:0;background:#f4f5f7;z-index:5000;overflow:auto}
+.adminhead{background:#050505;color:white;padding:16px 4%;display:flex;justify-content:space-between}
+.admincontent{width:94%;max-width:1400px;margin:25px auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.stat,.panel{background:white;padding:20px;border-radius:12px;margin-bottom:20px}
+.stat strong{font-size:28px}.stat small{display:block;color:#777}
+.adminsearch{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:15px}
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+.edit{background:#111;color:white;border:0;padding:7px;border-radius:5px}
+.delete{background:#d33;color:white;border:0;padding:7px;border-radius:5px}
+.login{max-width:400px;background:white;margin:100px auto;padding:30px;border-radius:15px}
+.hidden{display:none}
+@media(max-width:1000px){.cars{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+header{padding:13px}.logo{font-size:19px}nav button{display:none}
+.hero h1{font-size:38px}.cars{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}
+.modal{padding:10px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">SALIANJI <span>RENT CAR</span></div>
+<nav>
+<button onclick="carsSection()">Makina</button>
+<button onclick="openBooking()">Rezervo</button>
+<button onclick="openAdmin()">Admin</button>
+<select class="lang" onchange="language(this.value)">
+<option value="sq">🇦🇱 SQ</option>
+<option value="en">🇬🇧 EN</option>
+<option value="it">🇮🇹 IT</option>
+<option value="de">🇩🇪 DE</option>
+</select>
+</nav>
+</header>
+<section class="hero">
+<div>
+<h1>Salianji Rent Car</h1>
+<p id="heroText">Makina premium • Çmime të mira • Shërbim profesional</p>
+<button class="btn" onclick="carsSection()">Shiko makinat</button>
+</div>
+</section>
+<section class="container" id="carsSection">
+<h2 class="title">Flota jonë</h2>
+<div class="filters">
+<button class="active" onclick="filter('all',this)">Të gjitha</button>
+<button onclick="filter('Golf',this)">Golf</button>
+<button onclick="filter('BMW',this)">BMW</button>
+<button onclick="filter('Audi',this)">Audi</button>
+<button onclick="filter('Mercedes',this)">Mercedes</button>
+<button onclick="filter('G-Class',this)">G-Class</button>
+</div>
+<div class="cars" id="cars"></div>
+</section>
+<footer>
+<h2>Salianji Rent Car</h2>
+<p>© 2026 Salianji Rent Car • Tiranë, Albania</p>
+</footer>
+<!-- DETAILS -->
+<div class="modal" id="details">
+<div class="modalbox">
+<span class="close" onclick="closeModal('details')">×</span>
+<div id="detailsContent"></div>
+</div>
+</div>
+<!-- BOOKING -->
+<div class="modal" id="booking">
+<div class="modalbox">
+<span class="close" onclick="closeModal('booking')">×</span>
+<h2>Rezervo makinën</h2><br>
+<form class="form" onsubmit="saveBooking(event)">
+<input type="hidden" id="bookCar">
+<input id="name" placeholder="Emër dhe mbiemër" required>
+<input id="phone" placeholder="Telefon" required>
+<input id="email" type="email" placeholder="Email" required>
+<label>Data e marrjes</label>
+<input id="start" type="date" required>
+<label>Data e kthimit</label>
+<input id="end" type="date" required>
+<select id="pickup">
+<option>Tiranë</option>
+<option>Aeroporti Nënë Tereza</option>
+<option>Durrës</option>
+</select>
+<textarea id="notes" placeholder="Shënime"></textarea>
+<button class="btn">Dërgo rezervimin</button>
+</form>
+</div>
+</div>
+<!-- ADMIN -->
+<div class="admin" id="admin">
+<div id="loginBox" class="login">
+<h2>🔐 Admin</h2><br>
+<div class="form">
+<input id="adminUser" placeholder="Username">
+<input id="adminPass" type="password" placeholder="Password">
+<button class="btn" onclick="login()">Hyr</button>
+<p id="error" style="color:red"></p>
+</div>
+</div>
+<div id="dashboard" class="hidden">
+<div class="adminhead">
+<h2>⚙️ Salianji Admin</h2>
+<button class="btn" onclick="logout()">Dil</button>
+</div>
+<div class="admincontent">
+<div class="stats">
+<div class="stat">
+<small>Makina</small>
+<strong id="sCars">0</strong>
+</div>
+<div class="stat">
+<small>Rezervime</small>
+<strong id="sBookings">0</strong>
+</div>
+<div class="stat">
+<small>Disponueshme</small>
+<strong id="sAvailable">0</strong>
+</div>
+<div class="stat">
+<small>Rezervime të konfirmuara</small>
+<strong id="sConfirmed">0</strong>
+</div>
+</div>
+<div class="panel">
+<h2>🔎 Kërko makinë</h2>
+<input class="adminsearch"
+placeholder="Kërko sipas modelit..."
+oninput="adminSearch(this.value)">
+</div>
+<div class="panel">
+<h2>🚗 Makinat</h2>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Foto</th>
+<th>Makina</th>
+<th>Viti</th>
+<th>Çmimi</th>
+<th>Status</th>
+<th>Veprime</th>
+</tr>
+</thead>
+<tbody id="carAdmin"></tbody>
+</table>
+</div>
+</div>
+<div class="panel">
+<h2>➕ Shto makinë</h2>
+<form class="form" onsubmit="addCar(event)">
+<input id="newName" placeholder="Emri">
+<input id="newCategory" placeholder="Kategori">
+<input id="newYear" type="number" placeholder="Viti">
+<input id="newPrice" type="number" placeholder="Çmimi € / ditë">
+<input id="newEngine" placeholder="Motori">
+<input id="newImage" placeholder="Foto kryesore URL">
+<button class="btn">Shto</button>
+</form>
+</div>
+<div class="panel">
+<h2>📅 Rezervimet</h2>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Klienti</th>
+<th>Makina</th>
+<th>Datat</th>
+<th>Telefon</th>
+<th>Status</th>
+<th>Veprime</th>
+</tr>
+</thead>
+<tbody id="bookingAdmin"></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+/* =====================================================
+   20 MAKINA
+   ÇDO MAKINË KA "images: []" TË SAJ
+===================================================== */
+let cars=[
+{
+id:1,
+name:"Volkswagen Golf 6",
+category:"Golf",
+year:2012,
+price:35,
+engine:"1.6 TDI",
+fuel:"Diesel",
+gear:"Manual",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen%20Golf%20MK6.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen%20Golf%20Mk6%203-door%20hatchback%20%282%29.jpg"
+]
+},
+{
+id:2,
+name:"Volkswagen Golf 6",
+category:"Golf",
+year:2011,
+price:35,
+engine:"1.6 TDI",
+fuel:"Diesel",
+gear:"Manual",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen%20Golf%20MK6.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen%20Golf%20Mk6%203-door%20hatchback%20%282%29.jpg"
+]
+},
+{
+id:3,
+name:"Volkswagen Golf 7",
+category:"Golf",
+year:2015,
+price:40,
+engine:"1.6 TDI",
+fuel:"Diesel",
+gear:"Manual",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/VOLKSWAGEN%20GOLF%20%28Mk7%2C%20Typ%205G%29%20China%20%2820%29.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/VOLKSWAGEN%20GOLF%20%28Mk7%2C%20Typ%205G%29%20China%20%2825%29.jpg"
+]
+},
+{
+id:4,
+name:"Volkswagen Golf 7 GTD",
+category:"Golf",
+year:2017,
+price:50,
+engine:"2.0 TDI",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/VOLKSWAGEN%20GOLF%20%28Mk7%2C%20Typ%205G%29%20China%20%2858%29.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/VOLKSWAGEN%20GOLF%20%28Mk7%2C%20Typ%205G%29%20China%20%2832%29.jpg"
+]
+},
+{
+id:5,
+name:"BMW X5 F15",
+category:"BMW",
+year:2013,
+price:75,
+engine:"3.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW%20X5%20F15.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW-X5-F15%20Front.JPG"
+]
+},
+{
+id:6,
+name:"BMW X5 F15",
+category:"BMW",
+year:2016,
+price:85,
+engine:"3.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW%20X5%20F15.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Back%20of%20a%20BMW%20X5%20F15.jpg"
+]
+},
+{
+id:7,
+name:"BMW X3 F25",
+category:"BMW",
+year:2016,
+price:60,
+engine:"2.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW%20X3%20F25.jpg"
+]
+},
+{
+id:8,
+name:"BMW 5 Series F10",
+category:"BMW",
+year:2016,
+price:65,
+engine:"2.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW%205%20series%20F10%20%284727107480%29.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/BMW%205%20Series%20F10%20%2810627317554%29.jpg"
+]
+},
+{
+id:9,
+name:"Audi Q7",
+category:"Audi",
+year:2013,
+price:75,
+engine:"3.0 TDI",
+fuel:"Diesel",
+gear:"Automatic",
+seats:7,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Audi%20Q7%20%284L%29.jpg"
+]
+},
+{
+id:10,
+name:"Audi Q7",
+category:"Audi",
+year:2016,
+price:85,
+engine:"3.0 TDI",
+fuel:"Diesel",
+gear:"Automatic",
+seats:7,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Audi%20Q7%20%284M%29.jpg"
+]
+},
+{
+id:11,
+name:"Audi A6 C7",
+category:"Audi",
+year:2016,
+price:60,
+engine:"2.0 TDI",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Audi%20A6%20C7.jpg"
+]
+},
+{
+id:12,
+name:"Audi A4 B9",
+category:"Audi",
+year:2017,
+price:55,
+engine:"2.0 TDI",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Audi%20A4%20B9.jpg"
+]
+},
+{
+id:13,
+name:"Mercedes-Benz E-Class W212",
+category:"Mercedes",
+year:2015,
+price:70,
+engine:"2.2 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20W212%20E-Class.jpg"
+]
+},
+{
+id:14,
+name:"Mercedes-Benz E-Class W213",
+category:"Mercedes",
+year:2017,
+price:80,
+engine:"2.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20W213.jpg"
+]
+},
+{
+id:15,
+name:"Mercedes-Benz C-Class W205",
+category:"Mercedes",
+year:2016,
+price:60,
+engine:"2.1 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20W205.jpg"
+]
+},
+{
+id:16,
+name:"Mercedes-Benz GLE W166",
+category:"Mercedes",
+year:2017,
+price:90,
+engine:"3.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes%20Classe%20GLE%20W166.jpg"
+]
+},
+{
+id:17,
+name:"Mercedes-Benz GLC X253",
+category:"Mercedes",
+year:2018,
+price:80,
+engine:"2.2 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20GLC%20X253.jpg"
+]
+},
+{
+id:18,
+name:"Mercedes-AMG G 63",
+category:"G-Class",
+year:2024,
+price:350,
+engine:"4.0 V8 Biturbo",
+fuel:"Benzinë",
+gear:"AMG SPEEDSHIFT 9G",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-AMG%20G%2063%20%282024%E2%80%93%29%20DSC%200681.jpg",
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes%20G63%20AMG.jpg"
+]
+},
+{
+id:19,
+name:"Mercedes-Benz G-Class",
+category:"G-Class",
+year:2020,
+price:250,
+engine:"4.0 V8",
+fuel:"Benzinë",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20G%20500.jpg"
+]
+},
+{
+id:20,
+name:"Mercedes-Benz S-Class W222",
+category:"Mercedes",
+year:2019,
+price:120,
+engine:"3.0 Diesel",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-Benz%20W222.jpg"
+]
+}
+];
+/* =========================
+   STORAGE
+========================= */
+let bookings=JSON.parse(
+localStorage.getItem("salianjiBookings")||"[]"
+);
+let filterNow="all";
+/* =========================
+   HELPERS
+========================= */
+function img(url,name){
+return `<img src="${url}" alt="${name}"
+onerror="this.src='https://placehold.co/900x600?text=${encodeURIComponent(name)}'">`;
+}
+/* =========================
+   DISPLAY
+========================= */
+function display(){
+let box=document.getElementById("cars");
+let list=cars.filter(c=>
+filterNow==="all"||c.category===filterNow
+);
+box.innerHTML=list.map(c=>`
+<div class="card">
+${img(c.images[0],c.name)}
+<div class="body">
+<span class="badge">
+${c.available?"● Disponueshme":"● E zënë"}
+</span>
+<h3>${c.name}</h3>
+<div>${c.year}</div>
+<div class="price">€${c.price}/ditë</div>
+<div class="specs">
+<div>⚙️ ${c.engine}</div>
+<div>⛽ ${c.fuel}</div>
+<div>🚘 ${c.gear}</div>
+<div>👥 ${c.seats}</div>
+</div>
+<div class="actions">
+<button class="dark"
+onclick="details(${c.id})">
+Detaje
+</button>
+<button class="btn"
+onclick="openBooking(${c.id})">
+Rezervo
+</button>
+</div>
+</div>
+</div>
+`).join("");
+}
+/* =========================
+   FILTER
+========================= */
+function filter(cat,button){
+filterNow=cat;
+document.querySelectorAll(".filters button")
+.forEach(x=>x.classList.remove("active"));
+button.classList.add("active");
+display();
+}
+function carsSection(){
+document.getElementById("carsSection")
+.scrollIntoView({behavior:"smooth"});
+}
+/* =========================
+   DETAILS / GALLERY
+========================= */
+function details(id){
+let c=cars.find(x=>x.id===id);
+let gallery=c.images.map(x=>img(x,c.name)).join("");
+document.getElementById("detailsContent").innerHTML=`
+<h2>${c.name}</h2>
+${img(c.images[0],c.name)}
+<div class="gallery">${gallery}</div>
+<div class="specs">
+<div>📅 ${c.year}</div>
+<div>⚙️ ${c.engine}</div>
+<div>⛽ ${c.fuel}</div>
+<div>🚘 ${c.gear}</div>
+<div>👥 ${c.seats} vende</div>
+<div>💰 €${c.price}/ditë</div>
+</div>
+<button class="btn"
+onclick="closeModal('details');openBooking(${c.id})">
+Rezervo këtë makinë
+</button>
+`;
+document.getElementById("details").style.display="block";
+}
+/* =========================
+   MODALS
+========================= */
+function closeModal(id){
+document.getElementById(id).style.display="none";
+}
+function openBooking(id=""){
+document.getElementById("bookCar").value=id;
+document.getElementById("booking").style.display="block";
+}
+/* =========================
+   BOOKINGS
+========================= */
+function saveBooking(e){
+e.preventDefault();
+let car=cars.find(c=>
+c.id==document.getElementById("bookCar").value
+);
+let booking={
+id:Date.now(),
+name:document.getElementById("name").value,
+phone:document.getElementById("phone").value,
+email:document.getElementById("email").value,
+car:car?car.name:"Pa zgjedhur",
+carId:car?car.id:null,
+start:document.getElementById("start").value,
+end:document.getElementById("end").value,
+pickup:document.getElementById("pickup").value,
+notes:document.getElementById("notes").value,
+status:"Në pritje",
+price:car?car.price:0
+};
+bookings.push(booking);
+localStorage.setItem(
+"salianjiBookings",
+JSON.stringify(bookings)
+);
+alert("Rezervimi u dërgua me sukses!");
+e.target.reset();
+closeModal("booking");
+updateAdmin();
+}
+/* =========================
+   ADMIN LOGIN
+========================= */
+function openAdmin(){
+document.getElementById("admin").style.display="block";
+document.getElementById("loginBox").classList.remove("hidden");
+document.getElementById("dashboard").classList.add("hidden");
+}
+function login(){
+let u=document.getElementById("adminUser").value;
+let p=document.getElementById("adminPass").value;
+/* DEMO */
+if(u==="admin"&&p==="123456"){
+document.getElementById("loginBox").classList.add("hidden");
+document.getElementById("dashboard").classList.remove("hidden");
+updateAdmin();
+}else{
+document.getElementById("error").innerText=
+"Username ose password gabim";
+}
+}
+function logout(){
+document.getElementById("admin").style.display="none";
+}
+/* =========================
+   ADMIN DASHBOARD
+========================= */
+function updateAdmin(){
+document.getElementById("sCars").innerText=cars.length;
+document.getElementById("sBookings").innerText=
+bookings.length;
+document.getElementById("sAvailable").innerText=
+cars.filter(x=>x.available).length;
+document.getElementById("sConfirmed").innerText=
+bookings.filter(x=>x.status==="Konfirmuar").length;
+renderCarsAdmin();
+renderBookingsAdmin();
+}
+/* =========================
+   ADMIN CARS
+========================= */
+function renderCarsAdmin(list=cars){
+document.getElementById("carAdmin").innerHTML=
+list.map(c=>`
+<tr>
+<td>
+<img src="${c.images[0]}"
+style="width:70px;height:45px;object-fit:cover;border-radius:5px">
+</td>
+<td>${c.name}</td>
+<td>${c.year}</td>
+<td>€${c.price}</td>
+<td>
+<button class="edit"
+onclick="toggleCar(${c.id})">
+${c.available?"🟢 Aktiv":"🔴 Joaktiv"}
+</button>
+</td>
+<td>
+<button class="edit"
+onclick="editCar(${c.id})">
+Ndrysho
+</button>
+<button class="delete"
+onclick="deleteCar(${c.id})">
+Fshi
+</button>
+</td>
+</tr>
+`).join("");
+}
+function toggleCar(id){
+let c=cars.find(x=>x.id===id);
+if(c)c.available=!c.available;
+display();
+updateAdmin();
+}
+function editCar(id){
+let c=cars.find(x=>x.id===id);
+if(!c)return;
+let name=prompt("Emri",c.name);
+let price=prompt("Çmimi € / ditë",c.price);
+let image=prompt("URL e fotos kryesore",c.images[0]);
+if(name)c.name=name;
+if(price)c.price=Number(price);
+if(image)c.images[0]=image;
+display();
+updateAdmin();
+}
+function deleteCar(id){
+if(!confirm("Fshi makinën?"))return;
+cars=cars.filter(x=>x.id!==id);
+display();
+updateAdmin();
+}
+function adminSearch(q){
+let list=cars.filter(c=>
+c.name.toLowerCase().includes(q.toLowerCase())
+);
+renderCarsAdmin(list);
+}
+/* =========================
+   ADD CAR
+========================= */
+function addCar(e){
+e.preventDefault();
+let car={
+id:Date.now(),
+name:newName.value,
+category:newCategory.value,
+year:Number(newYear.value),
+price:Number(newPrice.value),
+engine:newEngine.value||"N/A",
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+available:true,
+images:[
+newImage.value||
+"https://placehold.co/900x600?text=Makina"
+]
+};
+cars.push(car);
+e.target.reset();
+display();
+updateAdmin();
+alert("Makina u shtua!");
+}
+/* =========================
+   ADMIN BOOKINGS
+========================= */
+function renderBookingsAdmin(){
+document.getElementById("bookingAdmin").innerHTML=
+bookings.map(b=>`
+<tr>
+<td>${b.name}</td>
+<td>${b.car}</td>
+<td>${b.start}<br>${b.end}</td>
+<td>${b.phone}</td>
+<td>${b.status}</td>
+<td>
+<button class="edit"
+onclick="statusBooking(${b.id})">
+Status
+</button>
+<button class="delete"
+onclick="deleteBooking(${b.id})">
+Fshi
+</button>
+</td>
+</tr>
+`).join("");
+}
+function statusBooking(id){
+let b=bookings.find(x=>x.id===id);
+if(!b)return;
+let s=prompt(
+"Statusi: Në pritje / Konfirmuar / Anuluar",
+b.status
+);
+if(s){
+b.status=s;
+localStorage.setItem(
+"salianjiBookings",
+JSON.stringify(bookings)
+);
+updateAdmin();
+}
+}
+function deleteBooking(id){
+if(!confirm("Fshi rezervimin?"))return;
+bookings=bookings.filter(x=>x.id!==id);
+localStorage.setItem(
+"salianjiBookings",
+JSON.stringify(bookings)
+);
+updateAdmin();
+}
+/* =========================
+   LANGUAGE
+========================= */
+function language(l){
+let text={
+sq:"Makina premium • Çmime të mira • Shërbim profesional",
+en:"Premium cars • Great prices • Professional service",
+it:"Auto premium • Ottimi prezzi • Servizio professionale",
+de:"Premium-Fahrzeuge • Gute Preise • Professioneller Service"
+};
+document.getElementById("heroText").innerText=text[l];
+}
+/* =========================
+   START
+========================= */
+display();
+</script>
+</body>
+</html>
