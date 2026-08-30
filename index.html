@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Salianji Rent Car | Rent a Car Albania</title>
+
+<meta name="description"
+content="Salianji Rent Car - Rent a car in Albania. BMW, Mercedes, Audi, Volkswagen and more.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f6f8;
+    color:#171717;
+    line-height:1.5;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#111;
+    color:white;
+    box-shadow:0 3px 15px rgba(0,0,0,.2);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#e31b23;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.nav-links a{
+    font-weight:600;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#e31b23;
+}
+
+.language{
+    background:#222;
+    color:white;
+    border:1px solid #555;
+    border-radius:8px;
+    padding:8px;
+}
+
+.hero{
+    min-height:620px;
+    background:
+    linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.65)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    padding:40px 20px;
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.hero h1{
+    font-size:60px;
+    line-height:1.05;
+    margin-bottom:20px;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#e31b23;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    border:none;
+    cursor:pointer;
+    padding:14px 24px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.btn-primary{
+    background:#e31b23;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#b91017;
+    transform:translateY(-2px);
+}
+
+.btn-dark{
+    background:#111;
+    color:white;
+}
+
+.btn-green{
+    background:#25D366;
+    color:white;
+}
+
+section{
+    padding:70px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.section-title p{
+    color:#666;
+}
+
+.search-box{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 5px 25px rgba(0,0,0,.08);
+    margin-bottom:35px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:15px;
+}
+
+.filters input,
+.filters select{
+    width:100%;
+    padding:13px 15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    background:white;
+}
+
+.cars-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.car-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.car-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(0,0,0,.14);
+}
+
+.car-image{
+    height:220px;
+    width:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.car-info{
+    padding:20px;
+}
+
+.car-info h3{
+    font-size:21px;
+    margin-bottom:7px;
+}
+
+.car-category{
+    color:#777;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.car-specs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:17px;
+}
+
+.spec{
+    background:#f0f1f3;
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:12px;
+}
+
+.price{
+    font-size:25px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.price small{
+    font-size:13px;
+    color:#777;
+    font-weight:400;
+}
+
+.car-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.car-buttons .btn{
+    padding:11px 8px;
+    font-size:14px;
+}
+
+.about{
+    background:#111;
+    color:white;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center;
+}
+
+.about h2{
+    font-size:40px;
+    margin-bottom:18px;
+}
+
+.about p{
+    color:#ddd;
+    margin-bottom:15px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:25px;
+}
+
+.feature{
+    background:#1d1d1d;
+    padding:18px;
+    border-radius:10px;
+}
+
+.contact{
+    background:white;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.contact-card{
+    padding:30px 20px;
+    text-align:center;
+    border:1px solid #eee;
+    border-radius:14px;
+}
+
+.contact-card .icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.contact-card h3{
+    margin-bottom:5px;
+}
+
+.contact-card p{
+    color:#666;
+}
+
+footer{
+    background:#080808;
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+}
+
+footer p{
+    color:#aaa;
+    font-size:14px;
+    margin-top:7px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:3000;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    padding:20px;
+    overflow:auto;
+}
+
+.modal.active{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-box{
+    width:100%;
+    max-width:600px;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    position:relative;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:12px;
+    border:none;
+    background:none;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.total-box{
+    background:#f2f3f5;
+    border-radius:10px;
+    padding:15px;
+    margin:15px 0;
+}
+
+.total-box strong{
+    font-size:24px;
+}
+
+/* ADMIN */
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.admin-table th,
+.admin-table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+    font-size:13px;
+}
+
+.admin-table th{
+    background:#111;
+    color:white;
+}
+
+.admin-login{
+    max-width:400px;
+    margin:auto;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    background:white;
+    border-radius:12px;
+    color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:560px;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .cars-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:13px 14px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    section{
+        padding:50px 14px;
+    }
+
+    .hero{
+        min-height:520px;
+    }
+
+    .hero h1{
+        font-size:37px;
+    }
+
+    .hero p{
+        font-size:17px;
+    }
+
+    .section-title h2{
+        font-size:30px;
+    }
+
+    .cars-grid{
+        grid-template-columns:1fr;
+    }
+
+    .car-image{
+        height:230px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .car-buttons{
+        grid-template-columns:1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+<div class="navbar">
+
+<div class="logo">
+Salianji <span>Rent Car</span>
+</div>
+
+<nav class="nav-links">
+<a href="#cars" data-i18n="cars">Makinat</a>
+<a href="#about" data-i18n="about">Rreth nesh</a>
+<a href="#contact" data-i18n="contact">Kontakt</a>
+<a href="#admin">Admin</a>
+</nav>
+
+<select class="language" id="languageSelect" onchange="changeLanguage()">
+<option value="sq">🇦🇱 SQ</option>
+<option value="en">🇬🇧 EN</option>
+<option value="it">🇮🇹 IT</option>
+<option value="de">🇩🇪 DE</option>
+</select>
+
+</div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+<span>Salianji</span> Rent Car
+</h1>
+
+<p data-i18n="heroText">
+Makina me qira në Shqipëri – Zgjidh makinën tënde dhe udhëto pa kufij.
+</p>
+
+<a href="#cars" class="btn btn-primary" data-i18n="viewCars">
+Shiko makinat
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CARS -->
+
+<section id="cars">
+
+<div class="container">
+
+<div class="section-title">
+<h2 data-i18n="ourCars">Makinat tona</h2>
+<p data-i18n="chooseCar">
+Zgjidh makinën që të përshtatet më shumë.
+</p>
+</div>
+
+
+<div class="search-box">
+
+<div class="filters">
+
+<input
+type="text"
+id="search"
+placeholder="Kërko makinë..."
+oninput="filterCars()">
+
+<select id="category" onchange="filterCars()">
+<option value="all">Të gjitha kategoritë</option>
+<option value="SUV">SUV</option>
+<option value="Sedan">Sedan</option>
+<option value="Luxury">Luxury</option>
+<option value="Economy">Economy</option>
+</select>
+
+<select id="sort" onchange="filterCars()">
+<option value="default">Renditja</option>
+<option value="low">Çmimi më i ulët</option>
+<option value="high">Çmimi më i lartë</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div id="carsGrid" class="cars-grid"></div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about" class="about">
+
+<div class="container about-grid">
+
+<div>
+
+<h2 data-i18n="aboutTitle">
+Pse Salianji Rent Car?
+</h2>
+
+<p data-i18n="aboutText1">
+Ne ofrojmë makina të mirëmbajtura dhe shërbim profesional për klientët tanë.
+</p>
+
+<p data-i18n="aboutText2">
+Rezervoni online dhe merrni makinën tuaj në Tiranë dhe në zona të tjera të Shqipërisë.
+</p>
+
+<div class="features">
+
+<div class="feature">
+<strong>🚗</strong>
+<p data-i18n="feature1">Makina të mirëmbajtura</p>
+</div>
+
+<div class="feature">
+<strong>💰</strong>
+<p data-i18n="feature2">Çmime konkurruese</p>
+</div>
+
+<div class="feature">
+<strong>📞</strong>
+<p data-i18n="feature3">Mbështetje 24/7</p>
+</div>
+
+<div class="feature">
+<strong>📍</strong>
+<p data-i18n="feature4">Marrje në Tiranë</p>
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<img
+src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=85"
+alt="Rent Car"
+style="width:100%;border-radius:15px;">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact">
+
+<div class="container">
+
+<div class="section-title">
+<h2 data-i18n="contactTitle">Na kontaktoni</h2>
+<p data-i18n="contactText">Jemi këtu për t'ju ndihmuar.</p>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-card">
+
+<div class="icon">📞</div>
+
+<h3>Telefon</h3>
+
+<p>+355 69 000 0000</p>
+
+<br>
+
+<a
+href="tel:+355690000000"
+class="btn btn-dark">
+Telefono
+</a>
+
+</div>
+
+
+<div class="contact-card">
+
+<div class="icon">💬</div>
+
+<h3>WhatsApp</h3>
+
+<p>Rezervim direkt në WhatsApp</p>
+
+<br>
+
+<a
+href="https://wa.me/355690000000"
+target="_blank"
+class="btn btn-green">
+WhatsApp
+</a>
+
+</div>
+
+
+<div class="contact-card">
+
+<div class="icon">📍</div>
+
+<h3>Location</h3>
+
+<p>Tirana, Albania</p>
+
+<br>
+
+<a
+href="https://www.google.com/maps/search/?api=1&query=Tirana+Albania"
+target="_blank"
+class="btn btn-dark">
+Google Maps
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Admin</h2>
+<p>Menaxho rezervimet</p>
+</div>
+
+<div id="adminLogin" class="admin-login">
+
+<div class="form-group">
+
+<label>Fjalëkalimi</label>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Admin password">
+
+</div>
+
+<button
+class="btn btn-dark"
+onclick="loginAdmin()">
+Hyr në Admin
+</button>
+
+<p
+id="adminError"
+style="color:red;margin-top:10px;">
+</p>
+
+</div>
+
+
+<div id="adminPanel" style="display:none;">
+
+<button
+class="btn btn-primary"
+onclick="clearBookings()">
+Fshi të gjitha rezervimet
+</button>
+
+<div id="bookingsContainer"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<strong>Salianji Rent Car</strong>
+
+<p>
+© 2026 Salianji Rent Car. All rights reserved.
+</p>
+
+</footer>
+
+
+<!-- BOOKING MODAL -->
+
+<div id="bookingModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeBooking()">
+×
+</button>
+
+<h2 data-i18n="bookingTitle">
+Rezervo makinën
+</h2>
+
+<form id="bookingForm">
+
+<div class="form-group">
+
+<label>Makinë</label>
+
+<input
+type="text"
+id="selectedCar"
+readonly>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label data-i18n="pickup">
+Data e marrjes
+</label>
+
+<input
+type="date"
+id="pickupDate"
+required
+onchange="calculateTotal()">
+
+</div>
+
+
+<div class="form-group">
+
+<label data-i18n="return">
+Data e kthimit
+</label>
+
+<input
+type="date"
+id="returnDate"
+required
+onchange="calculateTotal()">
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Emri dhe Mbiemri</label>
+
+<input
+type="text"
+id="customerName"
+required
+placeholder="Emri juaj">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Telefon</label>
+
+<input
+type="tel"
+id="customerPhone"
+required
+placeholder="+355...">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="customerEmail"
+placeholder="email@example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Shënime</label>
+
+<textarea
+id="customerMessage"
+rows="3"
+placeholder="Shënime shtesë..."></textarea>
+
+</div>
+
+
+<div class="total-box">
+
+<div>Çmimi për ditë:</div>
+
+<strong id="dailyPrice">€0</strong>
+
+<br><br>
+
+<div>Numri i ditëve:</div>
+
+<strong id="totalDays">0</strong>
+
+<br><br>
+
+<div>Totali:</div>
+
+<strong id="totalPrice">€0</strong>
+
+</div>
+
+
+<button
+type="submit"
+class="btn btn-primary"
+style="width:100%;">
+Konfirmo rezervimin
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   CAR DATABASE
+========================= */
+
+const cars = [
+
+{
+id:1,
+name:"BMW X5",
+year:2013,
+category:"SUV",
+price:70,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:2,
+name:"Audi Q7",
+year:2013,
+category:"SUV",
+price:75,
+fuel:"Diesel",
+gear:"Automatic",
+seats:7,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:3,
+name:"Mercedes-Benz GLE",
+year:2018,
+category:"Luxury",
+price:90,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:4,
+name:"Mercedes-Benz E-Class",
+year:2019,
+category:"Luxury",
+price:80,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:5,
+name:"Mercedes-Benz C-Class",
+year:2020,
+category:"Sedan",
+price:65,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:6,
+name:"BMW 5 Series",
+year:2018,
+category:"Sedan",
+price:70,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1523983388277-336a66bf9bcd?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:7,
+name:"BMW 3 Series",
+year:2019,
+category:"Sedan",
+price:60,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:8,
+name:"Audi A6",
+year:2019,
+category:"Sedan",
+price:65,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:9,
+name:"Audi A4",
+year:2018,
+category:"Sedan",
+price:55,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:10,
+name:"Volkswagen Passat",
+year:2018,
+category:"Sedan",
+price:45,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:11,
+name:"Volkswagen Golf",
+year:2019,
+category:"Economy",
+price:40,
+fuel:"Diesel",
+gear:"Manual",
+seats:5,
+image:"https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:12,
+name:"Toyota Corolla",
+year:2020,
+category:"Economy",
+price:40,
+fuel:"Hybrid",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1623869675781-80aa31012a5a?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:13,
+name:"Toyota RAV4",
+year:2020,
+category:"SUV",
+price:60,
+fuel:"Hybrid",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1568844293986-8c7f9f3c6d8b?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:14,
+name:"Range Rover Evoque",
+year:2019,
+category:"Luxury",
+price:85,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:15,
+name:"Range Rover Sport",
+year:2018,
+category:"Luxury",
+price:100,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:16,
+name:"Jeep Compass",
+year:2020,
+category:"SUV",
+price:55,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:17,
+name:"Hyundai Tucson",
+year:2021,
+category:"SUV",
+price:50,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:18,
+name:"Kia Sportage",
+year:2021,
+category:"SUV",
+price:50,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:19,
+name:"Ford Focus",
+year:2019,
+category:"Economy",
+price:38,
+fuel:"Diesel",
+gear:"Manual",
+seats:5,
+image:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:20,
+name:"Nissan Qashqai",
+year:2020,
+category:"SUV",
+price:48,
+fuel:"Diesel",
+gear:"Automatic",
+seats:5,
+image:"https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80"
+}
+
+];
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+const translations = {
+
+sq:{
+cars:"Makinat",
+about:"Rreth nesh",
+contact:"Kontakt",
+heroText:"Makina me qira në Shqipëri – Zgjidh makinën tënde dhe udhëto pa kufij.",
+viewCars:"Shiko makinat",
+ourCars:"Makinat tona",
+chooseCar:"Zgjidh makinën që të përshtatet më shumë.",
+aboutTitle:"Pse Salianji Rent Car?",
+aboutText1:"Ne ofrojmë makina të mirëmbajtura dhe shërbim profesional për klientët tanë.",
+aboutText2:"Rezervoni online dhe merrni makinën tuaj në Tiranë dhe në zona të tjera të Shqipërisë.",
+feature1:"Makina të mirëmbajtura",
+feature2:"Çmime konkurruese",
+feature3:"Mbështetje 24/7",
+feature4:"Marrje në Tiranë",
+contactTitle:"Na kontaktoni",
+contactText:"Jemi këtu për t'ju ndihmuar.",
+bookingTitle:"Rezervo makinën",
+pickup:"Data e marrjes",
+return:"Data e kthimit"
+},
+
+en:{
+cars:"Cars",
+about:"About us",
+contact:"Contact",
+heroText:"Car rental in Albania – Choose your car and travel without limits.",
+viewCars:"View cars",
+ourCars:"Our cars",
+chooseCar:"Choose the car that suits you best.",
+aboutTitle:"Why Salianji Rent Car?",
+aboutText1:"We offer well-maintained cars and professional service for our customers.",
+aboutText2:"Book online and collect your car in Tirana and other areas of Albania.",
+feature1:"Well-maintained cars",
+feature2:"Competitive prices",
+feature3:"24/7 support",
+feature4:"Pickup in Tirana",
+contactTitle:"Contact us",
+contactText:"We are here to help you.",
+bookingTitle:"Book your car",
+pickup:"Pickup date",
+return:"Return date"
+},
+
+it:{
+cars:"Auto",
+about:"Chi siamo",
+contact:"Contatti",
+heroText:"Noleggio auto in Albania – Scegli la tua auto e viaggia senza limiti.",
+viewCars:"Vedi auto",
+ourCars:"Le nostre auto",
+chooseCar:"Scegli l'auto più adatta a te.",
+aboutTitle:"Perché Salianji Rent Car?",
+aboutText1:"Offriamo auto ben mantenute e un servizio professionale.",
+aboutText2:"Prenota online e ritira la tua auto a Tirana e in altre zone dell'Albania.",
+feature1:"Auto ben mantenute",
+feature2:"Prezzi competitivi",
+feature3:"Assistenza 24/7",
+feature4:"Ritiro a Tirana",
+contactTitle:"Contattaci",
+contactText:"Siamo qui per aiutarti.",
+bookingTitle:"Prenota l'auto",
+pickup:"Data di ritiro",
+return:"Data di restituzione"
+},
+
+de:{
+cars:"Autos",
+about:"Über uns",
+contact:"Kontakt",
+heroText:"Autovermietung in Albanien – Wählen Sie Ihr Auto und reisen Sie ohne Grenzen.",
+viewCars:"Autos ansehen",
+ourCars:"Unsere Autos",
+chooseCar:"Wählen Sie das Auto, das am besten zu Ihnen passt.",
+aboutTitle:"Warum Salianji Rent Car?",
+aboutText1:"Wir bieten gepflegte Fahrzeuge und professionellen Service.",
+aboutText2:"Buchen Sie online und holen Sie Ihr Auto in Tirana oder anderen Gebieten Albaniens ab.",
+feature1:"Gepflegte Fahrzeuge",
+feature2:"Faire Preise",
+feature3:"24/7 Unterstützung",
+feature4:"Abholung in Tirana",
+contactTitle:"Kontaktieren Sie uns",
+contactText:"Wir helfen Ihnen gerne.",
+bookingTitle:"Auto reservieren",
+pickup:"Abholdatum",
+return:"Rückgabedatum"
+}
+
+};
+
+
+function changeLanguage(){
+
+const lang=document.getElementById("languageSelect").value;
+
+document.documentElement.lang=lang;
+
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+
+const key=el.getAttribute("data-i18n");
+
+if(translations[lang][key]){
+el.textContent=translations[lang][key];
+}
+
+});
+
+}
+
+
+/* =========================
+   RENDER CARS
+========================= */
+
+function renderCars(list=cars){
+
+const grid=document.getElementById("carsGrid");
+
+if(!list.length){
+
+grid.innerHTML=`
+<div class="empty">
+Nuk u gjet asnjë makinë.
+</div>
+`;
+
+return;
+}
+
+grid.innerHTML=list.map(car=>`
+
+<div class="car-card">
+
+<img
+class="car-image"
+src="${car.image}"
+alt="${car.name}"
+loading="lazy">
+
+<div class="car-info">
+
+<h3>${car.name}</h3>
+
+<div class="car-category">
+${car.category} • ${car.year}
+</div>
+
+<div class="car-specs">
+
+<span class="spec">⛽ ${car.fuel}</span>
+
+<span class="spec">⚙️ ${car.gear}</span>
+
+<span class="spec">👥 ${car.seats}</span>
+
+</div>
+
+<div class="price">
+€${car.price}
+<small>/ ditë</small>
+</div>
+
+<div class="car-buttons">
+
+<button
+class="btn btn-primary"
+onclick="openBooking(${car.id})">
+Rezervo
+</button>
+
+<a
+class="btn btn-green"
+target="_blank"
+href="https://wa.me/355690000000?text=${encodeURIComponent(
+'Përshëndetje, dua të rezervoj '+car.name
+)}">
+WhatsApp
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterCars(){
+
+let list=[...cars];
+
+const search=document.getElementById("search").value.toLowerCase();
+
+const category=document.getElementById("category").value;
+
+const sort=document.getElementById("sort").value;
+
+if(search){
+
+list=list.filter(car=>
+car.name.toLowerCase().includes(search) ||
+car.category.toLowerCase().includes(search)
+);
+
+}
+
+if(category!=="all"){
+
+list=list.filter(car=>car.category===category);
+
+}
+
+if(sort==="low"){
+
+list.sort((a,b)=>a.price-b.price);
+
+}
+
+if(sort==="high"){
+
+list.sort((a,b)=>b.price-a.price);
+
+}
+
+renderCars(list);
+
+}
+
+
+/* =========================
+   BOOKING
+========================= */
+
+let selectedCar=null;
+
+function openBooking(id){
+
+selectedCar=cars.find(car=>car.id===id);
+
+if(!selectedCar)return;
+
+document.getElementById("selectedCar").value=selectedCar.name;
+
+document.getElementById("dailyPrice").textContent="€"+selectedCar.price;
+
+document.getElementById("bookingModal").classList.add("active");
+
+calculateTotal();
+
+}
+
+
+function closeBooking(){
+
+document.getElementById("bookingModal").classList.remove("active");
+
+}
+
+
+function calculateTotal(){
+
+if(!selectedCar)return;
+
+const pickup=document.getElementById("pickupDate").value;
+
+const ret=document.getElementById("returnDate").value;
+
+if(!pickup || !ret){
+
+document.getElementById("totalDays").textContent="0";
+
+document.getElementById("totalPrice").textContent="€0";
+
+return;
+
+}
+
+const start=new Date(pickup);
+
+const end=new Date(ret);
+
+const diff=end-start;
+
+const days=Math.ceil(diff/(1000*60*60*24));
+
+if(days<=0){
+
+document.getElementById("totalDays").textContent="0";
+
+document.getElementById("totalPrice").textContent="€0";
+
+return;
+
+}
+
+document.getElementById("totalDays").textContent=days;
+
+document.getElementById("totalPrice").textContent=
+"€"+(days*selectedCar.price);
+
+}
+
+
+/* =========================
+   SAVE BOOKING
+========================= */
+
+document.getElementById("bookingForm").addEventListener(
+"submit",
+function(e){
+
+e.preventDefault();
+
+if(!selectedCar)return;
+
+const pickup=document.getElementById("pickupDate").value;
+
+const ret=document.getElementById("returnDate").value;
+
+const start=new Date(pickup);
+
+const end=new Date(ret);
+
+const days=Math.ceil(
+(end-start)/(1000*60*60*24)
+);
+
+if(days<=0){
+
+alert("Data e kthimit duhet të jetë pas datës së marrjes.");
+
+return;
+
+}
+
+const booking={
+
+id:Date.now(),
+
+car:selectedCar.name,
+
+price:selectedCar.price,
+
+pickup:pickup,
+
+returnDate:ret,
+
+days:days,
+
+total:days*selectedCar.price,
+
+name:document.getElementById("customerName").value,
+
+phone:document.getElementById("customerPhone").value,
+
+email:document.getElementById("customerEmail").value,
+
+message:document.getElementById("customerMessage").value,
+
+created:new Date().toLocaleString()
+
+};
+
+let bookings=
+JSON.parse(localStorage.getItem("salianjiBookings")||"[]");
+
+bookings.push(booking);
+
+localStorage.setItem(
+"salianjiBookings",
+JSON.stringify(bookings)
+);
+
+const whatsappText=
+`Përshëndetje Salianji Rent Car!
+
+Rezervim i ri:
+
+Makina: ${booking.car}
+Data marrjes: ${booking.pickup}
+Data kthimit: ${booking.returnDate}
+Ditë: ${booking.days}
+Totali: €${booking.total}
+
+Klienti: ${booking.name}
+Telefon: ${booking.phone}
+Email: ${booking.email}
+Mesazh: ${booking.message}`;
+
+const whatsappURL=
+"https://wa.me/355690000000?text="+
+encodeURIComponent(whatsappText);
+
+alert(
+"Rezervimi u regjistrua me sukses! Do të kontaktoheni së shpejti."
+);
+
+window.open(whatsappURL,"_blank");
+
+document.getElementById("bookingForm").reset();
+
+closeBooking();
+
+if(
+document.getElementById("adminPanel").style.display!=="none"
+){
+loadBookings();
+}
+
+});
+
+
+/* =========================
+   ADMIN
+========================= */
+
+const ADMIN_PASSWORD="123456";
+
+
+function loginAdmin(){
+
+const password=
+document.getElementById("adminPassword").value;
+
+if(password===ADMIN_PASSWORD){
+
+document.getElementById("adminLogin").style.display="none";
+
+document.getElementById("adminPanel").style.display="block";
+
+loadBookings();
+
+}else{
+
+document.getElementById("adminError").textContent=
+"Fjalëkalimi është i gabuar.";
+
+}
+
+}
+
+
+function loadBookings(){
+
+const bookings=
+JSON.parse(localStorage.getItem("salianjiBookings")||"[]");
+
+const container=
+document.getElementById("bookingsContainer");
+
+if(!bookings.length){
+
+container.innerHTML=`
+<div class="empty" style="margin-top:20px">
+Nuk ka rezervime.
+</div>
+`;
+
+return;
+
+}
+
+container.innerHTML=`
+
+<div style="overflow-x:auto">
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Makina</th>
+<th>Klienti</th>
+<th>Telefon</th>
+<th>Marrja</th>
+<th>Kthimi</th>
+<th>Ditë</th>
+<th>Total</th>
+<th>Krijuar</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${bookings.map(b=>`
+
+<tr>
+
+<td>${b.id}</td>
+
+<td>${b.car}</td>
+
+<td>${b.name}</td>
+
+<td>${b.phone}</td>
+
+<td>${b.pickup}</td>
+
+<td>${b.returnDate}</td>
+
+<td>${b.days}</td>
+
+<td>€${b.total}</td>
+
+<td>${b.created}</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+function clearBookings(){
+
+if(!confirm("Je i sigurt që dëshiron të fshish të gjitha rezervimet?")){
+return;
+}
+
+localStorage.removeItem("salianjiBookings");
+
+loadBookings();
+
+}
+
+
+/* =========================
+   MODAL CLICK OUTSIDE
+========================= */
+
+document.getElementById("bookingModal")
+.addEventListener("click",function(e){
+
+if(e.target===this){
+closeBooking();
+}
+
+});
+
+
+/* =========================
+   DATE MINIMUM
+========================= */
+
+const today=
+new Date().toISOString().split("T")[0];
+
+document.getElementById("pickupDate").min=today;
+
+document.getElementById("returnDate").min=today;
+
+
+/* =========================
+   START
+========================= */
+
+renderCars();
+
+</script>
+
+</body>
+</html>
