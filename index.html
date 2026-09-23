@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Salianji Rent Car</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#071019;
+    --bg2:#0d1720;
+    --card:#111d27;
+    --card2:#172631;
+    --gold:#d7b43d;
+    --gold2:#f0d56a;
+    --white:#fff;
+    --gray:#9ba8b3;
+    --border:#263743;
+    --green:#40c878;
+    --red:#e85d5d;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:white;
+    overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,16,25,.97);
+    border-bottom:1px solid rgba(215,180,61,.2);
+    backdrop-filter:blur(12px);
+}
+
+.nav{
+    max-width:1250px;
+    width:94%;
+    margin:auto;
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    color:var(--gold2);
+    white-space:nowrap;
+}
+
+.logo span{
+    color:white;
+}
+
+.menu{
+    display:flex;
+    gap:22px;
+}
+
+.menu a{
+    font-size:14px;
+    color:#d6dde1;
+}
+
+.menu a:hover{
+    color:var(--gold2);
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.btn{
+    border:1px solid var(--border);
+    background:#111d27;
+    color:white;
+    padding:10px 14px;
+    border-radius:9px;
+    font-weight:700;
+}
+
+.btn:hover{
+    border-color:var(--gold);
+}
+
+.btn-gold{
+    background:var(--gold);
+    color:#111;
+    border-color:var(--gold);
+}
+
+.btn-gold:hover{
+    background:var(--gold2);
+}
+
+.language{
+    background:#111d27;
+    border:1px solid var(--border);
+    color:white;
+    padding:9px;
+    border-radius:9px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(215,180,61,.14),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #071019,
+            #0b151e
+        );
+}
+
+.hero-inner{
+    width:94%;
+    max-width:1250px;
+    margin:auto;
+}
+
+.hero-content{
+    width:58%;
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:30px;
+    border:1px solid rgba(215,180,61,.4);
+    color:var(--gold2);
+    background:rgba(215,180,61,.08);
+    margin-bottom:20px;
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,78px);
+    line-height:1;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:var(--gold2);
+}
+
+.hero p{
+    max-width:620px;
+    color:var(--gray);
+    line-height:1.7;
+    font-size:17px;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+}
+
+.hero-car{
+    position:absolute;
+    right:-3%;
+    bottom:5%;
+    width:53%;
+    max-width:700px;
+    border-radius:20px;
+    opacity:.92;
+    animation:carFloat 4s infinite ease-in-out;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));
+}
+
+@keyframes carFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:75px 0;
+}
+
+.container{
+    width:94%;
+    max-width:1250px;
+    margin:auto;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.title h2{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.title h2 span{
+    color:var(--gold2);
+}
+
+.title p{
+    color:var(--gray);
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.category{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:17px 8px;
+    text-align:center;
+    transition:.2s;
+}
+
+.category:hover,
+.category.active{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+}
+
+.category-icon{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.category-name{
+    font-size:12px;
+    color:#d9dfe3;
+}
+
+/* ================= CARS ================= */
+
+.cars-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.car-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.car-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(215,180,61,.6);
+}
+
+.car-img{
+    height:210px;
+    position:relative;
+    overflow:hidden;
+}
+
+.car-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.car-card:hover .car-img img{
+    transform:scale(1.06);
+}
+
+.car-cat{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:rgba(0,0,0,.75);
+    color:var(--gold2);
+    padding:6px 9px;
+    border-radius:7px;
+    font-size:11px;
+}
+
+.car-info{
+    padding:16px;
+}
+
+.car-info h3{
+    margin-bottom:9px;
+}
+
+.car-details{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    color:var(--gray);
+    font-size:11px;
+    margin-bottom:15px;
+}
+
+.car-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.price{
+    color:var(--gold2);
+    font-weight:900;
+    font-size:19px;
+}
+
+.price small{
+    color:var(--gray);
+    font-size:11px;
+    font-weight:normal;
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.service{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:25px;
+}
+
+.service-icon{
+    font-size:31px;
+    margin-bottom:12px;
+}
+
+.service p{
+    color:var(--gray);
+    margin-top:8px;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    z-index:5000;
+    padding:15px;
+    overflow:auto;
+}
+
+.modal.show{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-box{
+    width:min(850px,100%);
+    max-height:94vh;
+    overflow:auto;
+    background:#0c1720;
+    border:1px solid rgba(215,180,61,.45);
+    border-radius:18px;
+    box-shadow:0 30px 90px rgba(0,0,0,.7);
+}
+
+.modal-header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 20px;
+    background:#0c1720;
+    border-bottom:1px solid var(--border);
+}
+
+.modal-header h2{
+    color:var(--gold2);
+    font-size:21px;
+}
+
+.close{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#172630;
+    border:1px solid var(--border);
+    color:white;
+    font-size:20px;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+/* ================= FORMS ================= */
+
+.form-title{
+    color:var(--gold2);
+    font-weight:900;
+    font-size:15px;
+    margin:20px 0 12px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--border);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    color:#cbd3d8;
+    font-size:12px;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    padding:12px;
+    background:#071019;
+    border:1px solid var(--border);
+    color:white;
+    border-radius:9px;
+    outline:none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--gold);
+}
+
+/* ================= BOOKING NOTICE ================= */
+
+.notice{
+    display:flex;
+    gap:10px;
+    background:rgba(215,180,61,.08);
+    border:1px solid rgba(215,180,61,.4);
+    color:var(--gold2);
+    padding:13px;
+    border-radius:11px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* ================= OPTIONS ================= */
+
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.option{
+    position:relative;
+}
+
+.option input{
+    position:absolute;
+    opacity:0;
+}
+
+.option label{
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    background:#111d27;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px;
+    cursor:pointer;
+}
+
+.option label:hover{
+    border-color:#63717c;
+}
+
+.option input:checked + label{
+    border-color:var(--gold);
+    background:rgba(215,180,61,.09);
+}
+
+.check{
+    width:22px;
+    height:22px;
+    flex:none;
+    border:2px solid #66747e;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:transparent;
+}
+
+.option input:checked + label .check{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#111;
+}
+
+.option-text{
+    display:flex;
+    flex-direction:column;
+}
+
+.option-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+.option-price{
+    color:var(--gold2);
+    font-size:12px;
+    margin-top:4px;
+}
+
+/* ================= SUMMARY ================= */
+
+.summary{
+    margin-top:20px;
+    background:#071019;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:17px;
+}
+
+.summary-line{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:7px 0;
+    color:#c8d0d5;
+    font-size:13px;
+}
+
+.summary-total{
+    border-top:1px solid var(--border);
+    margin-top:8px;
+    padding-top:14px;
+    display:flex;
+    justify-content:space-between;
+    font-size:21px;
+    font-weight:900;
+}
+
+.summary-total span:last-child{
+    color:var(--gold2);
+}
+
+.confirm{
+    width:100%;
+    border:0;
+    background:var(--gold);
+    color:#111;
+    font-weight:900;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    font-size:15px;
+}
+
+.confirm:hover{
+    background:var(--gold2);
+}
+
+/* ================= AUTH ================= */
+
+.auth-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.auth-tabs button{
+    flex:1;
+    padding:11px;
+    border:1px solid var(--border);
+    background:#111d27;
+    color:white;
+    border-radius:9px;
+}
+
+.auth-tabs button.active{
+    background:var(--gold);
+    color:#111;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:190px 1fr;
+}
+
+.dashboard-menu{
+    border-right:1px solid var(--border);
+    padding:15px;
+}
+
+.dashboard-menu button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#d4dce0;
+    padding:12px;
+    text-align:left;
+    border-radius:8px;
+    margin-bottom:5px;
+}
+
+.dashboard-menu button:hover{
+    background:#162631;
+    color:var(--gold2);
+}
+
+.dashboard-content{
+    padding:20px;
+}
+
+.profile{
+    display:flex;
+    gap:13px;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.avatar{
+    width:53px;
+    height:53px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:var(--gold);
+    color:#111;
+    font-size:23px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.stat{
+    background:#111d27;
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:15px;
+}
+
+.stat small{
+    color:var(--gray);
+}
+
+.stat strong{
+    display:block;
+    color:var(--gold2);
+    font-size:22px;
+    margin-top:5px;
+}
+
+.booking-card{
+    background:#111d27;
+    border:1px solid var(--border);
+    padding:15px;
+    border-radius:11px;
+    margin-top:10px;
+}
+
+.booking-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.status{
+    color:var(--gold2);
+    font-size:12px;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:12px;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:10px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+.admin-table th{
+    color:var(--gold2);
+}
+
+.admin-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:25px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    z-index:9999;
+    left:50%;
+    bottom:20px;
+    transform:translate(-50%,100px);
+    background:#111d27;
+    border:1px solid var(--gold);
+    color:white;
+    padding:14px 18px;
+    border-radius:10px;
+    opacity:0;
+    transition:.3s;
+    max-width:90%;
+    text-align:center;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:35px 0;
+    color:var(--gray);
+}
+
+.footer-inner{
+    width:94%;
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1000px){
+
+    .menu{
+        display:none;
+    }
+
+    .cars-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-content{
+        width:70%;
+    }
+
+    .hero-car{
+        opacity:.3;
+        width:70%;
+    }
+}
+
+@media(max-width:650px){
+
+    .nav{
+        min-height:65px;
+    }
+
+    .logo{
+        font-size:17px;
+    }
+
+    .header-actions{
+        gap:4px;
+    }
+
+    .header-actions .btn{
+        padding:8px 9px;
+        font-size:10px;
+    }
+
+    .language{
+        padding:8px 5px;
+        font-size:11px;
+    }
+
+    .hero{
+        min-height:570px;
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .hero h1{
+        font-size:44px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .hero-car{
+        width:100%;
+        right:-20%;
+        bottom:5%;
+        opacity:.2;
+    }
+
+    section{
+        padding:55px 0;
+    }
+
+    .title h2{
+        font-size:29px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cars-grid{
+        grid-template-columns:1fr;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .modal{
+        padding:7px;
+        align-items:flex-start;
+    }
+
+    .modal-box{
+        margin-top:5px;
+        max-height:97vh;
+    }
+
+    .modal-body{
+        padding:14px;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-menu{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:4px;
+    }
+
+    .stats,
+    .admin-stats{
+        grid-template-columns:1fr;
+    }
+
+    .admin-table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+<div class="nav">
+
+    <a class="logo" href="#">
+        🚗 <span>Salianji</span> Rent Car
+    </a>
+
+    <nav class="menu">
+        <a href="#cars" data-i18n="cars">Makinat</a>
+        <a href="#categories" data-i18n="categories">Kategoritë</a>
+        <a href="#services" data-i18n="services">Shërbimet</a>
+        <a href="#contact" data-i18n="contact">Kontakt</a>
+    </nav>
+
+    <div class="header-actions">
+
+        <select
+            id="language"
+            class="language"
+            onchange="changeLanguage()"
+        >
+            <option value="sq">🇦🇱 SQ</option>
+            <option value="en">🇬🇧 EN</option>
+            <option value="it">🇮🇹 IT</option>
+            <option value="de">🇩🇪 DE</option>
+        </select>
+
+        <button
+            class="btn"
+            onclick="openAuth('login')"
+            data-i18n="login"
+        >
+            Log in
+        </button>
+
+        <button
+            class="btn"
+            onclick="openAuth('register')"
+            data-i18n="register"
+        >
+            Regjistrohu
+        </button>
+
+        <button
+            class="btn btn-gold"
+            onclick="openAdmin()"
+        >
+            ⚙️ Admin
+        </button>
+
+    </div>
+
+</div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🇦🇱 Rent a Car Albania
+        </div>
+
+        <h1>
+            Udhëto
+            <span>pa kufij.</span>
+        </h1>
+
+        <p data-i18n="heroText">
+            Zgjidh makinën, bëj rezervimin online dhe nis udhëtimin
+            me Salianji Rent Car.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="btn btn-gold"
+                onclick="goCars()"
+                data-i18n="viewCars"
+            >
+                🚗 Shiko makinat
+            </button>
+
+            <button
+                class="btn"
+                onclick="openBooking()"
+                data-i18n="bookNow"
+            >
+                📅 Rezervo tani
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<img
+    class="hero-car"
+    src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1400&q=90"
+    alt="Salianji Rent Car"
+>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section id="categories">
+
+<div class="container">
+
+<div class="title">
+
+    <h2>
+        Zgjidh
+        <span>kategorinë</span>
+    </h2>
+
+    <p>
+        20 makina të ndara sipas kategorive.
+    </p>
+
+</div>
+
+<div class="categories">
+
+    <div
+        class="category active"
+        onclick="filterCategory('')"
+    >
+        <div class="category-icon">🚗</div>
+        <div class="category-name">Të gjitha</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('Ekonomike')"
+    >
+        <div class="category-icon">💰</div>
+        <div class="category-name">Ekonomike</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('Sedan')"
+    >
+        <div class="category-icon">🚘</div>
+        <div class="category-name">Sedan</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('SUV')"
+    >
+        <div class="category-icon">🚙</div>
+        <div class="category-name">SUV</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('Premium')"
+    >
+        <div class="category-icon">👑</div>
+        <div class="category-name">Premium</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('Sportive')"
+    >
+        <div class="category-icon">🏎️</div>
+        <div class="category-name">Sportive</div>
+    </div>
+
+    <div
+        class="category"
+        onclick="filterCategory('7 Vende')"
+    >
+        <div class="category-icon">👨‍👩‍👧‍👦</div>
+        <div class="category-name">7 Vende</div>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CARS ================= -->
+
+<section id="cars">
+
+<div class="container">
+
+<div class="title">
+
+    <h2>
+        Flota
+        <span>jonë</span>
+    </h2>
+
+    <p>
+        Zgjidh makinën dhe kliko Rezervo.
+    </p>
+
+</div>
+
+<div
+    id="carsGrid"
+    class="cars-grid"
+></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+<div class="container">
+
+<div class="title">
+
+    <h2>
+        Shërbimet
+        <span>tona</span>
+    </h2>
+
+</div>
+
+<div class="services">
+
+    <div class="service">
+        <div class="service-icon">🚗</div>
+        <h3>20 makina</h3>
+        <p>
+            Flotë e ndarë sipas kategorive.
+        </p>
+    </div>
+
+    <div class="service">
+        <div class="service-icon">📅</div>
+        <h3>Rezervim online</h3>
+        <p>
+            Rezervo makinën në çdo moment.
+        </p>
+    </div>
+
+    <div class="service">
+        <div class="service-icon">📍</div>
+        <h3>GPS</h3>
+        <p>
+            Mundësi GPS për klientët.
+        </p>
+    </div>
+
+    <div class="service">
+        <div class="service-icon">🌍</div>
+        <h3>Udhëtime jashtë Shqipërisë</h3>
+        <p>
+            Mundësi për të nxjerrë makinën jashtë kufirit
+            me opsionin përkatës.
+        </p>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="title">
+
+    <h2>
+        Na
+        <span>kontakto</span>
+    </h2>
+
+</div>
+
+<div class="services">
+
+    <div class="service">
+        <div class="service-icon">📞</div>
+        <h3>Telefon</h3>
+        <p>+355 69 XXX XXXX</p>
+    </div>
+
+    <div class="service">
+        <div class="service-icon">✉️</div>
+        <h3>Email</h3>
+        <p>info@salian
