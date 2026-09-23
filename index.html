@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Salianji Rent Car</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080808;
+    color:#fff;
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(5,5,5,.96);
+    border-bottom:1px solid #292929;
+}
+
+.navbar{
+    max-width:1250px;
+    min-height:75px;
+    margin:auto;
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    color:#d4af37;
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#fff;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#ddd;
+}
+
+.nav-links a:hover{
+    color:#d4af37;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.btn{
+    border:0;
+    border-radius:8px;
+    padding:11px 17px;
+    font-weight:bold;
+}
+
+.btn-gold{
+    background:#d4af37;
+    color:#000;
+}
+
+.btn-dark{
+    background:#171717;
+    color:#fff;
+    border:1px solid #333;
+}
+
+.btn-red{
+    background:#a62929;
+    color:#fff;
+}
+
+.lang{
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:8px;
+    padding:9px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:600px;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,.95),
+        rgba(0,0,0,.60),
+        rgba(0,0,0,.30)
+    ),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+
+    display:flex;
+    align-items:center;
+}
+
+.hero-inner{
+    max-width:1250px;
+    width:100%;
+    margin:auto;
+    padding:70px 20px;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.hero h1{
+    font-size:58px;
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#d4af37;
+}
+
+.hero p{
+    color:#ddd;
+    font-size:19px;
+    margin-bottom:28px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.hero-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:30px;
+}
+
+.hero-info div{
+    background:rgba(15,15,15,.85);
+    border:1px solid #333;
+    border-radius:8px;
+    padding:11px 14px;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    max-width:1250px;
+    margin:auto;
+    padding:75px 20px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:38px;
+    margin-bottom:8px;
+}
+
+.section-title span{
+    color:#d4af37;
+}
+
+.section-title p{
+    color:#999;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    border:1px solid #333;
+    background:#151515;
+    color:#ddd;
+    padding:10px 17px;
+    border-radius:25px;
+}
+
+.category-btn.active{
+    background:#d4af37;
+    color:#000;
+}
+
+/* ================= CARS ================= */
+
+.cars-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.car-card{
+    background:#121212;
+    border:1px solid #292929;
+    border-radius:12px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.car-card:hover{
+    transform:translateY(-4px);
+    border-color:#d4af37;
+}
+
+.car-image{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+}
+
+.car-body{
+    padding:18px;
+}
+
+.car-category{
+    color:#d4af37;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.car-name{
+    font-size:21px;
+    font-weight:bold;
+    margin:5px 0;
+}
+
+.car-details{
+    display:flex;
+    justify-content:space-between;
+    color:#999;
+    font-size:14px;
+    margin:12px 0;
+}
+
+.car-gps{
+    color:#7bdd8a;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.car-price{
+    color:#d4af37;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.car-price small{
+    color:#999;
+    font-size:13px;
+    font-weight:normal;
+}
+
+.car-actions{
+    margin-top:15px;
+}
+
+/* ================= SERVICES ================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.service{
+    background:#121212;
+    border:1px solid #292929;
+    border-radius:12px;
+    padding:25px;
+    text-align:center;
+}
+
+.service-icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.service p{
+    color:#999;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+    background:rgba(0,0,0,.82);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    position:relative;
+
+    width:min(650px,100%);
+    max-height:92vh;
+    overflow-y:auto;
+
+    background:#111;
+    border:1px solid #333;
+    border-radius:14px;
+    padding:25px;
+}
+
+.modal-box.large{
+    width:min(1000px,100%);
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:10px;
+
+    background:none;
+    border:0;
+
+    color:#aaa;
+    font-size:28px;
+}
+
+.close:hover{
+    color:#fff;
+}
+
+.modal-title{
+    color:#d4af37;
+    margin-bottom:20px;
+}
+
+/* ================= FORMS ================= */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    color:#ddd;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    padding:12px;
+
+    background:#191919;
+    color:#fff;
+
+    border:1px solid #383838;
+    border-radius:8px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    outline:none;
+    border-color:#d4af37;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+/* ================= AUTH ================= */
+
+.auth-tabs{
+    display:flex;
+    gap:6px;
+    margin-bottom:20px;
+}
+
+.auth-tab{
+    flex:1;
+    padding:11px;
+
+    background:#191919;
+    color:#aaa;
+
+    border:1px solid #333;
+    border-radius:7px;
+}
+
+.auth-tab.active{
+    background:#d4af37;
+    color:#000;
+}
+
+/* ================= BOOKING ================= */
+
+.booking-car{
+    display:flex;
+    gap:15px;
+    align-items:center;
+
+    padding:15px;
+
+    background:#161616;
+    border:1px solid #333;
+    border-radius:10px;
+
+    margin-bottom:20px;
+}
+
+.booking-car img{
+    width:130px;
+    height:85px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.booking-car-price{
+    color:#d4af37;
+    font-weight:bold;
+}
+
+/* OPTIONS */
+
+.options-box{
+    border:1px solid #333;
+    border-radius:10px;
+    padding:17px;
+    margin:20px 0;
+}
+
+.options-box h3{
+    color:#d4af37;
+    margin-bottom:5px;
+}
+
+.options-description{
+    color:#777;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.option{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:14px 5px;
+
+    border-bottom:1px solid #292929;
+}
+
+.option:last-child{
+    border-bottom:0;
+}
+
+.option-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.option-left input{
+    width:19px;
+    height:19px;
+    accent-color:#d4af37;
+}
+
+.option-price{
+    color:#d4af37;
+    font-weight:bold;
+}
+
+.gps{
+    display:flex;
+    gap:10px;
+    padding:14px 5px;
+    color:#7bdd8a;
+}
+
+/* TOTAL */
+
+.total-box{
+    background:#191919;
+    border:1px solid #d4af37;
+    border-radius:10px;
+    padding:18px;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    color:#aaa;
+    margin-bottom:7px;
+}
+
+.total-main{
+    display:flex;
+    justify-content:space-between;
+
+    border-top:1px solid #333;
+    margin-top:10px;
+    padding-top:12px;
+
+    font-size:25px;
+    font-weight:bold;
+}
+
+.total-main span:last-child{
+    color:#d4af37;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-user{
+    padding:15px;
+    background:#171717;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.booking-item{
+    background:#171717;
+    border:1px solid #303030;
+    border-radius:10px;
+    padding:17px;
+    margin-bottom:12px;
+}
+
+.booking-item h3{
+    color:#d4af37;
+}
+
+.booking-item p{
+    color:#aaa;
+    margin:5px 0;
+}
+
+.status{
+    display:inline-block;
+    padding:4px 9px;
+    border-radius:20px;
+    background:#174b28;
+    color:#8cff9e;
+    font-size:12px;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.admin-table-wrapper{
+    overflow-x:auto;
+}
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+.admin-table th,
+.admin-table td{
+    border:1px solid #333;
+    padding:10px;
+    text-align:left;
+}
+
+.admin-table th{
+    background:#191919;
+    color:#d4af37;
+}
+
+.admin-table td{
+    background:#101010;
+}
+
+/* ================= TOAST ================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    z-index:6000;
+
+    display:none;
+
+    max-width:360px;
+
+    background:#191919;
+    border:1px solid #d4af37;
+
+    padding:14px 18px;
+    border-radius:8px;
+}
+
+#toast.show{
+    display:block;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#050505;
+    border-top:1px solid #292929;
+    text-align:center;
+    padding:40px 20px;
+}
+
+footer p{
+    color:#777;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+    .cars-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .nav-links{
+        display:none;
+    }
+}
+
+@media(max-width:750px){
+
+    .cars-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:520px){
+
+    .cars-grid,
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:37px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .nav-actions .btn-dark{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="navbar">
+
+<a href="#" class="logo">
+    Salianji <span>Rent Car</span>
+</a>
+
+<nav class="nav-links">
+    <a href="#cars">Makinat</a>
+    <a href="#services">Shërbimet</a>
+    <a href="#about">Rreth nesh</a>
+    <a href="#contact">Kontakt</a>
+</nav>
+
+<div class="nav-actions">
+
+<select id="languageSelect" class="lang">
+    <option value="sq">🇦🇱 SQ</option>
+    <option value="en">🇬🇧 EN</option>
+    <option value="it">🇮🇹 IT</option>
+    <option value="de">🇩🇪 DE</option>
+</select>
+
+<button id="loginButton" class="btn btn-dark">
+    Hyr / Regjistrohu
+</button>
+
+<button id="dashboardButton"
+        class="btn btn-gold"
+        style="display:none;">
+    Paneli im
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div class="hero-content">
+
+<h1>
+    Udhëto me
+    <span>Salianji Rent Car</span>
+</h1>
+
+<p>
+    Zgjidh makinën, bëj rezervimin online
+    dhe udhëto me komoditet.
+</p>
+
+<div class="hero-buttons">
+
+<button id="heroCarsButton"
+        class="btn btn-gold">
+    Shiko makinat
+</button>
+
+</div>
+
+<div class="hero-info">
+
+<div>🚗 20 makina</div>
+<div>📍 GPS në çdo makinë</div>
+<div>📅 Rezervim online</div>
+<div>🔐 Sistem i sigurt</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CARS -->
+
+<section id="cars">
+
+<div class="section-title">
+
+<h2>
+    Zgjidh <span>makinën</span> tënde
+</h2>
+
+<p>
+    Makina për çdo nevojë
+</p>
+
+</div>
+
+<div id="categories"
+     class="categories">
+</div>
+
+<div id="carsGrid"
+     class="cars-grid">
+</div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+<div class="section-title">
+
+<h2>
+    Shërbimet <span>tona</span>
+</h2>
+
+<p>
+    Shërbim profesional për klientët tanë
+</p>
+
+</div>
+
+<div class="services-grid">
+
+<div class="service">
+
+<div class="service-icon">
+🚗
+</div>
+
+<h3>
+Makina të pastra
+</h3>
+
+<p>
+Makinat kontrollohen dhe pastrohen
+para çdo rezervimi.
+</p>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-icon">
+📍
+</div>
+
+<h3>
+GPS
+</h3>
+
+<p>
+Çdo makinë ka GPS të integruar.
+</p>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-icon">
+📅
+</div>
+
+<h3>
+Rezervim online
+</h3>
+
+<p>
+Rezervo makinën në pak minuta.
+</p>
+
+</div>
+
+
+<div class="service">
+
+<div class="service-icon">
+🛡️
+</div>
+
+<h3>
+Mbështetje
+</h3>
+
+<p>
+Mbështetje për klientët tanë.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="section-title">
+
+<h2>
+Rreth <span>Salianji Rent Car</span>
+</h2>
+
+<p>
+Shërbim modern i makinave me qira.
+</p>
+
+</div>
+
+<div style="
+max-width:850px;
+margin:auto;
+text-align:center;
+color:#aaa;
+">
+
+Salianji Rent Car ofron makina ekonomike,
+sedan, SUV, premium, sportive, 7 vende
+dhe elektrike.
+
+Çdo makinë ka GPS të integruar.
+
+Sedilja për bebe, shoferi ekstra dhe
+dalja jashtë Shqipërisë janë opsione
+që klienti i zgjedh vetëm nëse dëshiron.
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="section-title">
+
+<h2>
+<span>Kontakt</span>
+</h2>
+
+<p>
+Na kontakto
+</p>
+
+</div>
+
+<div style="
+text-align:center;
+color:#aaa;
+line-height:2;
+">
+
+📞 +355 69 000 0000<br>
+
+📧 info@salianjirentcar.com<br>
+
+📍 Tiranë, Shqipëri
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div class="logo">
+Salianji <span>Rent Car</span>
+</div>
+
+<p>
+© 2026 Salianji Rent Car
+</p>
+
+</footer>
+
+
+<!-- ================= AUTH MODAL ================= -->
+
+<div id="authModal"
+     class="modal">
+
+<div class="modal-box">
+
+<button class="close"
+        data-close="authModal">
+×
+</button>
+
+<h2 class="modal-title">
+Llogaria
+</h2>
+
+
+<div class="auth-tabs">
+
+<button id="loginTab"
+        class="auth-tab active">
+Hyr
+</button>
+
+<button id="registerTab"
+        class="auth-tab">
+Regjistrohu
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<form id="loginForm">
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+    id="loginEmail"
+    type="email"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Fjalëkalimi
+</label>
+
+<input
+    id="loginPassword"
+    type="password"
+    required
+>
+
+</div>
+
+
+<button
+    class="btn btn-gold"
+    style="width:100%;"
+    type="submit">
+
+Hyr
+
+</button>
+
+</form>
+
+
+<!-- REGISTER -->
+
+<form id="registerForm"
+      style="display:none;">
+
+<div class="form-group">
+
+<label>
+Emri dhe mbiemri
+</label>
+
+<input
+    id="registerName"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+    id="registerEmail"
+    type="email"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Telefon
+</label>
+
+<input
+    id="registerPhone"
+    type="tel"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Fjalëkalimi
+</label>
+
+<input
+    id="registerPassword"
+    type="password"
+    minlength="6"
+    required
+>
+
+</div>
+
+
+<button
+    class="btn btn-gold"
+    style="width:100%;"
+    type="submit">
+
+Krijo llogari
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- ================= BOOKING MODAL ================= -->
+
+<div id="bookingModal"
+     class="modal">
+
+<div class="modal-box large">
+
+<button class="close"
+        data-close="bookingModal">
+×
+</button>
+
+<h2 class="modal-title">
+Rezervo makinën
+</h2>
+
+
+<div class="booking-car">
+
+<img id="bookingCarImage"
+     src=""
+     alt="Makina">
+
+<div>
+
+<h3 id="bookingCarName">
+</h3>
+
+<div class="booking-car-price">
+
+€<span id="bookingCarPrice">
+0
+</span>
+
+/ ditë
+
+</div>
+
+</div>
+
+</div>
+
+
+<form id="bookingForm">
+
+<input id="bookingCarId"
+       type="hidden">
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Data dhe ora e marrjes
+</label>
+
+<input
+    id="bookingStart"
+    type="datetime-local"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Data dhe ora e kthimit
+</label>
+
+<input
+    id="bookingEnd"
+    type="datetime-local"
+    required
+>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Vendi i marrjes
+</label>
+
+<select id="pickup">
+
+<option>
+Tiranë
+</option>
+
+<option>
+Aeroporti i Rinasit
+</option>
+
+<option>
+Durrës
+</option>
+
+<option>
+Fier
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+Emri dhe mbiemri
+</label>
+
+<input
+    id="customerName"
+    required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Telefon
+</label>
+
+<input
+    id="customerPhone"
+    type="tel"
+    required
+>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+    id="customerEmail"
+    type="email"
+    required
+>
+
+</div>
+
+
+<!-- OPSIONET -->
+
+<div class="options-box">
+
+<h3>
+Opsione shtesë
+</h3>
+
+<div class="options-description">
+
+Këto janë opsionale.
+Klienti i zgjedh vetëm nëse i dëshiron.
+
+</div>
+
+
+<label class="option">
+
+<div class="option-left">
+
+<input
+    id="babySeat"
+    type="checkbox"
+>
+
+<span>
+👶 Sedilje për bebe
+</span>
+
+</div>
+
+<span class="option-price">
++€10
+</span>
+
+</label>
+
+
+<label class="option">
+
+<div class="option-left">
+
+<input
+    id="extraDriver"
+    type="checkbox"
+>
+
+<span>
+👨‍✈️ Shofer ekstra
+</span>
+
+</div>
+
+<span class="option-price">
++€20
+</span>
+
+</label>
+
+
+<label class="option">
+
+<div class="option-left">
+
+<input
+    id="outsideAlbania"
+    type="checkbox"
+>
+
+<span>
+🌍 Dalje jashtë Shqipërisë
+</span>
+
+</div>
+
+<span class="option-price">
++€50
+</span>
+
+</label>
+
+
+<div class="gps">
+
+<span>
+📍
+</span>
+
+<span>
+<strong>GPS i integruar</strong>
+— çdo makinë e ka GPS.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Shënime
+</label>
+
+<textarea
+    id="bookingNotes"
+    rows="3"
+    placeholder="Shënime shtesë..."
+></textarea>
+
+</div>
+
+
+<!-- TOTAL -->
+
+<div class="total-box">
+
+<div class="total-row">
+
+<span>
+Çmimi i makinës:
+</span>
+
+<span id="basePrice">
+€0
+</span>
+
+</div>
+
+
+<div class="total-row">
+
+<span>
+Ditët:
+</span>
+
+<span id="bookingDays">
+0
+</span>
+
+</div>
+
+
+<div class="total-row">
+
+<span>
+Sedilje bebe:
+</span>
+
+<span id="babyPrice">
+€0
+</span>
+
+</div>
+
+
+<div class="total-row">
+
+<span>
+Shofer ekstra:
+</span>
+
+<span id="driverPrice">
+€0
+</span>
+
+</div>
+
+
+<div class="total-row">
+
+<span>
+Jashtë Shqipërisë:
+</span>
+
+<span id="outsidePrice">
+€0
+</span>
+
+</div>
+
+
+<div class="total-main">
+
+<span>
+TOTALI
+</span>
+
+<span id="bookingTotal">
+€0
+</span>
+
+</div>
+
+</div>
+
+
+<button
+    type="submit"
+    class="btn btn-gold"
+    style="
+    width:100%;
+    margin-top:18px;
+    ">
+
+✓ Konfirmo rezervimin
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- ================= USER DASHBOARD ================= -->
+
+<div id="dashboardModal"
+     class="modal">
+
+<div class="modal-box large">
+
+<button class="close"
+        data-close="dashboardModal">
+×
+</button>
+
+<h2 class="modal-title">
+Paneli im
+</h2>
+
+<div id="dashboardUser"
+     class="dashboard-user">
+</div>
+
+<h3 style="margin-bottom:15px;">
+Rezervimet e mia
+</h3>
+
+<div id="myBookings">
+</div>
+
+<button
+    id="logoutButton"
+    class="btn btn-red"
+    style="margin-top:15px;">
+
+Dil nga llogaria
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+
+<div id="adminModal"
+     class="modal">
+
+<div class="modal-box large">
+
+<button class="close"
+        data-close="adminModal">
+×
+</button>
+
+<div class="admin-header">
+
+<h2 class="modal-title"
+    style="margin:0;">
+Admin Dashboard
+</h2>
+
+<button
+    id="adminRefresh"
+    class="btn btn-dark">
+
+Rifresko
+
+</button>
+
+</div>
+
+
+<div id="adminContent">
+</div>
+
+</div>
+
+</div>
+
+
+<div id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+/*
+    VENDOS KËTU:
+
+    1. URL e Supabase
+    2. Publishable / Anon Key
+
+    MOS vendos service_role key.
+*/
+
+const SUPABASE_URL =
+    "https://zbcklxnrvfqdmxplfncw.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "VENDOS_KETU_PUBLISHABLE_OSE_ANON_KEY";
+
+
+const { createClient } =
+    supabase;
+
+
+const db =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =========================================================
+   CARS
+========================================================= */
+
+const cars = [
+
+{
+id:1,
+name:"Volkswagen Golf 7",
+category:"Ekonomike",
+price:35,
+seats:5,
+transmission:"Manual",
+gps:true,
+image:"https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:2,
+name:"Toyota Yaris",
+category:"Ekonomike",
+price:30,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:3,
+name:"Kia Rio",
+category:"Ekonomike",
+price:32,
+seats:5,
+transmission:"Manual",
+gps:true,
+image:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:4,
+name:"Hyundai i20",
+category:"Ekonomike",
+price:33,
+seats:5,
+transmission:"Manual",
+gps:true,
+image:"https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:5,
+name:"BMW 3 Series",
+category:"Sedan",
+price:55,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:6,
+name:"Audi A6",
+category:"Sedan",
+price:65,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:7,
+name:"Mercedes E-Class",
+category:"Sedan",
+price:70,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:8,
+name:"BMW 5 Series",
+category:"Sedan",
+price:75,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1523983388277-336a66bf9bcd?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:9,
+name:"BMW X5",
+category:"SUV",
+price:80,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:10,
+name:"Audi Q7",
+category:"SUV",
+price:85,
+seats:7,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:11,
+name:"BMW X3",
+category:"SUV",
+price:70,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:12,
+name:"Toyota RAV4",
+category:"SUV",
+price:60,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:13,
+name:"Mercedes G-Class",
+category:"Premium",
+price:150,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:14,
+name:"Range Rover Sport",
+category:"Premium",
+price:140,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:15,
+name:"BMW 7 Series",
+category:"Premium",
+price:160,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:16,
+name:"Porsche 911",
+category:"Sportive",
+price:220,
+seats:2,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:17,
+name:"Audi RS Q8",
+category:"Sportive",
+price:200,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:18,
+name:"Lamborghini Urus",
+category:"Sportive",
+price:350,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:19,
+name:"Mercedes V-Class",
+category:"7 Vende",
+price:110,
+seats:7,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+id:20,
+name:"Tesla Model 3",
+category:"Elektrike",
+price:90,
+seats:5,
+transmission:"Automatic",
+gps:true,
+image:"https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=900&q=80"
+}
+
+];
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+const categories = [
+"Të gjitha",
+"Ekonomike",
+"Sedan",
+"SUV",
+"Premium",
+"Sportive",
+"7 Vende",
+"Elektrike"
+];
+
+let selectedCategory =
+"Të gjitha";
+
+let pendingCarId =
+null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function toast(message){
+
+const el =
+document.getElementById("toast");
+
+el.textContent =
+message;
+
+el.classList.add("show");
+
+setTimeout(function(){
+
+el.classList.remove("show");
+
+},3500);
+
+}
+
+
+function openModal(id){
+
+document
+.getElementById(id)
+.classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+}
+
+
+function formatDate(value){
+
+return new Date(value)
+.toLocaleString(
+"sq-AL",
+{
+dateStyle:"short",
+timeStyle:"short"
+}
+);
+
+}
+
+
+function localDateTime(date){
+
+const y =
+date.getFullYear();
+
+const m =
+String(date.getMonth()+1)
+.padStart(2,"0");
+
+const d =
+String(date.getDate())
+.padStart(2,"0");
+
+const h =
+String(date.getHours())
+.padStart(2,"0");
+
+const min =
+String(date.getMinutes())
+.padStart(2,"0");
+
+return `${y}-${m}-${d}T${h}:${min}`;
+
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+function renderCategories(){
+
+const box =
+document.getElementById("categories");
+
+box.innerHTML = "";
+
+categories.forEach(function(category){
+
+const button =
+document.createElement("button");
+
+button.className =
+"category-btn" +
+(category === selectedCategory
+? " active"
+: "");
+
+button.textContent =
+category;
+
+button.onclick =
+function(){
+
+selectedCategory =
+category;
+
+renderCategories();
+
+renderCars();
+
+};
+
+box.appendChild(button);
+
+});
+
+}
+
+
+/* =========================================================
+   CARS
+========================================================= */
+
+function renderCars(){
+
+const grid =
+document.getElementById("carsGrid");
+
+grid.innerHTML = "";
+
+const filtered =
+selectedCategory === "Të gjitha"
+? cars
+: cars.filter(function(car){
+
+return car.category ===
+selectedCategory;
+
+});
+
+
+filtered.forEach(function(car){
+
+const card =
+document.createElement("div");
+
+card.className =
+"car-card";
+
+card.innerHTML = `
+
+<img
+class="car-image"
+src="${car.image}"
+alt="${car.name}"
+>
+
+<div class="car-body">
+
+<div class="car-category">
+${car.category}
+</div>
+
+<div class="car-name">
+${car.name}
+</div>
+
+<div class="car-details">
+
+<span>
+👤 ${car.seats} vende
+</span>
+
+<span>
+⚙️ ${car.transmission}
+</span>
+
+</div>
+
+<div class="car-gps">
+📍 GPS i integruar
+</div>
+
+<div class="car-price">
+€${car.price}
+<small>/ ditë</small>
+</div>
+
+<div class="car-actions">
+
+<button
+class="btn btn-gold"
+style="width:100%;"
+data-car-id="${car.id}"
+>
+Rezervo
+</button>
+
+</div>
+
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+
+document
+.querySelectorAll("[data-car-id]")
+.forEach(function(button){
+
+button.onclick =
+function(){
+
+openBooking(
+Number(button.dataset.carId)
+);
+
+};
+
+});
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function setAuthMode(mode){
+
+const loginForm =
+document.getElementById("loginForm");
+
+const registerForm =
+document.getElementById("registerForm");
+
+const loginTab =
+document.getElementById("loginTab");
+
+const registerTab =
+document.getElementById("registerTab");
+
+
+if(mode === "login"){
+
+loginForm.style.display =
+"block";
+
+registerForm.style.display =
+"none";
+
+loginTab.classList.add("active");
+
+registerTab.classList.remove("active");
+
+}else{
+
+loginForm.style.display =
+"none";
+
+registerForm.style.display =
+"block";
+
+loginTab.classList.remove("active");
+
+registerTab.classList.add("active");
+
+}
+
+}
+
+
+/* =========================================================
+   CURRENT USER
+========================================================= */
+
+async function getCurrentUser(){
+
+const result =
+await db.auth.getUser();
+
+return result.data.user || null;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+async function updateHeader(){
+
+const user =
+await getCurrentUser();
+
+const loginButton =
+document.getElementById("loginButton");
+
+const dashboardButton =
+document.getElementById("dashboardButton");
+
+
+if(user){
+
+loginButton.style.display =
+"none";
+
+dashboardButton.style.display =
+"block";
+
+}else{
+
+loginButton.style.display =
+"block";
+
+dashboardButton.style.display =
+"none";
+
+}
