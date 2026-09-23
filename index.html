@@ -1,0 +1,4250 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="Salianji Rent Car - Makina me qira në Tiranë dhe Shqipëri">
+
+  <title>Salianji Rent Car | Makina me Qira</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-topbar {
+      background: #05090e;
+      color: #aeb6bf;
+      font-size: 13px;
+      padding: 8px 5%;
+      border-bottom: 1px solid rgba(201,162,39,.12);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5,9,14,.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,162,39,.18);
+    }
+
+    .nav-wrap {
+      max-width: 1400px;
+      margin: auto;
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-wrap > a {
+      text-decoration: none;
+    }
+
+    .logo-main {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #e0bd4f;
+    }
+
+    .logo-sub {
+      display: block;
+      color: #fff;
+      font-size: 9px;
+      letter-spacing: 5px;
+      text-align: center;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 28px;
+      margin-left: auto;
+    }
+
+    .main-nav a {
+      color: #d8dde3;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .main-nav a:hover {
+      color: #e0bd4f;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .header-btn {
+      border: 1px solid rgba(201,162,39,.55);
+      background: transparent;
+      color: #fff;
+      padding: 10px 13px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .header-btn:hover {
+      background: rgba(201,162,39,.12);
+    }
+
+    .header-btn.gold {
+      background: #c9a227;
+      color: #111;
+      border: 0;
+      font-weight: 700;
+    }
+
+    .admin-btn {
+      color: #e0bd4f;
+      border-color: #c9a227;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: transparent;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 9px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 720px;
+    }
+
+    .hero-inner {
+      max-width: 1400px;
+      width: 100%;
+      margin: auto;
+      padding: 100px 5% 170px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-kicker {
+      color: #e0bd4f;
+      letter-spacing: 5px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(42px,6vw,78px);
+      line-height: 1.03;
+      max-width: 700px;
+      margin-bottom: 22px;
+      color: #fff;
+    }
+
+    .hero-title span {
+      color: #e0bd4f;
+    }
+
+    .hero-description {
+      max-width: 610px;
+      color: #d0d6dc;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .gold-btn,
+    .outline-btn {
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .gold-btn {
+      background: linear-gradient(135deg,#e0bd4f,#c9a227);
+      color: #111;
+    }
+
+    .outline-btn {
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+    }
+
+    .hero-car-wrap {
+      position: absolute;
+      right: 0;
+      bottom: 35px;
+      width: min(62vw,850px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-car {
+      width: 100%;
+      display: block;
+      filter: drop-shadow(0 28px 35px rgba(0,0,0,.7));
+      animation: driveCar 6s ease-in-out infinite;
+    }
+
+    .road-light {
+      position: absolute;
+      bottom: 10px;
+      right: 5%;
+      width: 70%;
+      height: 80px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.13),
+        transparent
+      );
+      transform: skewX(-25deg);
+      animation: roadLight 3s linear infinite;
+    }
+
+    @keyframes driveCar {
+      0%,100% {
+        transform: translateX(65px);
+        opacity: .72;
+      }
+
+      50% {
+        transform: translateX(-15px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes roadLight {
+      from {
+        transform: translateX(-30%) skewX(-25deg);
+      }
+
+      to {
+        transform: translateX(40%) skewX(-25deg);
+      }
+    }
+
+    .trust-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 35px;
+    }
+
+    .trust-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: #fff;
+    }
+
+    .trust-icon {
+      font-size: 25px;
+      color: #e0bd4f;
+    }
+
+    .trust-item small {
+      display: block;
+      color: #929ba5;
+      margin-top: 3px;
+    }
+
+    /* =========================
+       BOOKING SEARCH
+    ========================= */
+
+    .booking-panel {
+      max-width: 1200px;
+      margin: -70px auto 0;
+      position: relative;
+      z-index: 20;
+      padding: 18px;
+      background: rgba(8,14,21,.94);
+      border: 1px solid rgba(201,162,39,.35);
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+      gap: 10px;
+    }
+
+    .field {
+      background: #0e1720;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 9px;
+      padding: 9px 12px;
+    }
+
+    .field label {
+      display: block;
+      color: #7f8993;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #fff;
+    }
+
+    .search-btn {
+      border: 0;
+      border-radius: 9px;
+      background: #c9a227;
+      color: #111;
+      font-weight: 800;
+      padding: 0 22px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section-wrap {
+      max-width: 1400px;
+      margin: auto;
+      padding: 80px 5%;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .section-head h2 {
+      font-size: 36px;
+    }
+
+    .section-head h2 span {
+      color: #e0bd4f;
+    }
+
+    .section-head p {
+      color: #8f98a2;
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(7,1fr);
+      gap: 12px;
+    }
+
+    .category-card {
+      padding: 10px;
+      border-radius: 14px;
+      background: #0d151e;
+      border: 1px solid rgba(255,255,255,.1);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: #c9a227;
+    }
+
+    .category-card img {
+      height: 95px;
+      object-fit: cover;
+      border-radius: 9px;
+      width: 100%;
+      display: block;
+    }
+
+    .category-card h3 {
+      font-size: 14px;
+      margin: 10px 2px 3px;
+      color: #fff;
+    }
+
+    .category-card p {
+      font-size: 12px;
+      margin: 0 2px;
+      color: #8e97a1;
+    }
+
+    /* =========================
+       CARS
+    ========================= */
+
+    .cars-toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter-btn {
+      background: #0d151e;
+      color: #cdd2d8;
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #c9a227;
+      color: #111;
+      border-color: #c9a227;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .car-card {
+      position: relative;
+      overflow: hidden;
+      background: #0c141d;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 15px;
+    }
+
+    .car-image-wrap {
+      position: relative;
+    }
+
+    .car-image-wrap img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .availability {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      background: #168a52;
+      color: #fff;
+      border-radius: 20px;
+      padding: 5px 9px;
+      font-size: 11px;
+    }
+
+    .car-body {
+      padding: 16px;
+    }
+
+    .car-body h3 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .car-body p {
+      color: #8f98a2;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .car-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #89929d;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+
+    .car-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 800;
+      color: #e0bd4f;
+    }
+
+    .price small {
+      font-size: 11px;
+      color: #8f98a2;
+      font-weight: 400;
+    }
+
+    .reserve-small {
+      border: 0;
+      background: #c9a227;
+      color: #111;
+      font-weight: 700;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services-grid,
+    .benefits-grid,
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .service-card,
+    .benefit-card,
+    .step-card {
+      padding: 24px;
+      background: #0c141d;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 15px;
+    }
+
+    .service-icon {
+      font-size: 34px;
+      color: #e0bd4f;
+      margin-bottom: 12px;
+    }
+
+    .service-card h3,
+    .benefit-card h3,
+    .step-card h3 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .service-card p,
+    .benefit-card p,
+    .step-card p {
+      color: #8f98a2;
+      line-height: 1.6;
+    }
+
+    .step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #c9a227;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .mountain-section {
+      background:
+        linear-gradient(
+          rgba(5,9,14,.80),
+          rgba(5,9,14,.96)
+        ),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+        center/cover fixed;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-box {
+      padding: 28px;
+      background: #0c141d;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 15px;
+    }
+
+    .contact-box h3 {
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .contact-box p {
+      color: #9ca3af;
+      margin: 10px 0;
+    }
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(7px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(700px,100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: #0b121a;
+      border: 1px solid rgba(201,162,39,.35);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.7);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-head h2 {
+      color: #fff;
+    }
+
+    .close-modal {
+      background: transparent;
+      border: 0;
+      color: #aaa;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .modal-field.full {
+      grid-column: 1/-1;
+    }
+
+    .modal-field label {
+      font-size: 12px;
+      color: #aeb6bf;
+    }
+
+    .modal-field input,
+    .modal-field select,
+    .modal-field textarea {
+      background: #080f16;
+      border: 1px solid #27323d;
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      outline: 0;
+    }
+
+    .modal-field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .modal-actions button {
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dark-btn {
+      background: #18232d;
+      color: #fff;
+      border: 1px solid #33404c;
+    }
+
+    .modal-gold {
+      background: #c9a227;
+      color: #111;
+      border: 0;
+      font-weight: 700;
+    }
+
+    .service-modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .service-open-card {
+      padding: 18px;
+      background: #101a24;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+    }
+
+    .service-open-card h3 {
+      color: #fff;
+      margin: 8px 0;
+    }
+
+    .service-open-card p {
+      color: #8f98a2;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    .admin-panel {
+      width: min(1100px,100%);
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .admin-stat {
+      background: #101a24;
+      border: 1px solid rgba(201,162,39,.2);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .admin-stat small {
+      color: #89929d;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .admin-stat strong {
+      color: #e0bd4f;
+      font-size: 25px;
+    }
+
+    .admin-section {
+      margin-top: 20px;
+    }
+
+    .admin-section h3 {
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .admin-table-wrap {
+      overflow-x: auto;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      text-align: left;
+      color: #d8dde3;
+      font-size: 13px;
+    }
+
+    .admin-table th {
+      background: #101a24;
+      color: #e0bd4f;
+    }
+
+    .admin-table td {
+      background: #0b121a;
+    }
+
+    .admin-status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 15px;
+      font-size: 11px;
+      background: #168a52;
+      color: #fff;
+    }
+
+    .admin-status.cancelled {
+      background: #8b2635;
+    }
+
+    .admin-empty {
+      padding: 25px;
+      text-align: center;
+      color: #89929d;
+    }
+
+    .admin-danger {
+      background: #8b2635;
+      color: #fff;
+      border: 0;
+      padding: 7px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 3000;
+      background: #0d151e;
+      color: #fff;
+      border: 1px solid rgba(201,162,39,.4);
+      padding: 14px 18px;
+      border-radius: 10px;
+      display: none;
+      box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:1100px) {
+
+      .main-nav {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .cars-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .booking-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .search-btn {
+        padding: 14px;
+      }
+
+      .services-grid,
+      .benefits-grid,
+      .steps-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .admin-stats {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:700px) {
+
+      .site-topbar {
+        font-size: 11px;
+      }
+
+      .site-topbar span:last-child {
+        display: none;
+      }
+
+      .nav-wrap {
+        padding: 13px 12px;
+        gap: 8px;
+      }
+
+      .logo-main {
+        font-size: 19px;
+        letter-spacing: 2px;
+      }
+
+      .logo-sub {
+        font-size: 7px;
+        letter-spacing: 3px;
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .header-btn {
+        padding: 8px 9px;
+        font-size: 11px;
+      }
+
+      .header-btn.gold {
+        display: none;
+      }
+
+      .admin-btn {
+        display: block !important;
+      }
+
+      .hero {
+        min-height: 760px;
+      }
+
+      .hero-inner {
+        padding: 70px 20px 190px;
+      }
+
+      .hero-title {
+        font-size: 40px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .hero-car-wrap {
+        width: 110vw;
+        right: -25%;
+        bottom: 45px;
+        opacity: .45;
+      }
+
+      .booking-panel {
+        margin: -55px 15px 0;
+      }
+
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .cars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .benefits-grid,
+      .steps-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-grid,
+      .service-modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-field.full {
+        grid-column: auto;
+      }
+
+      .trust-row {
+        gap: 15px;
+      }
+
+      .admin-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       TOP BAR
+  ========================= -->
+
+  <div class="site-topbar">
+    <span>📍 Tiranë, Shqipëri</span>
+    <span style="margin-left:20px;">
+      📞 +355 69 123 4567
+    </span>
+    <span style="float:right;">
+      Mbështetje 24/7
+    </span>
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header class="site-header">
+
+    <div class="nav-wrap">
+
+      <a href="#home" aria-label="Salianji Rent Car">
+
+        <div class="logo-main">
+          SALIANJI
+        </div>
+
+        <span class="logo-sub">
+          RENT CAR
+        </span>
+
+      </a>
+
+
+      <nav class="main-nav">
+
+        <a href="#home">
+          Kreu
+        </a>
+
+        <a href="#cars">
+          Makinat
+        </a>
+
+        <a href="#services">
+          Shërbimet
+        </a>
+
+        <a href="#how-it-works">
+          Rreth Nesh
+        </a>
+
+        <a href="#contact">
+          Kontakt
+        </a>
+
+      </nav>
+
+
+      <div class="header-actions">
+
+        <button
+          class="header-btn"
+          onclick="openModal('authModal')">
+
+          🔐 Login
+
+        </button>
+
+
+        <!-- ADMIN -->
+
+        <button
+          class="header-btn admin-btn"
+          onclick="openAdmin()">
+
+          ⚙️ Admin
+
+        </button>
+
+
+        <button
+          class="header-btn gold"
+          onclick="openBooking()">
+
+          Rezervo Tani →
+
+        </button>
+
+
+        <button
+          class="mobile-menu"
+          onclick="scrollToSection('cars')">
+
+          ☰
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section id="home" class="hero">
+
+      <div class="hero-inner">
+
+        <div class="hero-kicker">
+          LUKS NË ÇDO UDHËTIM
+        </div>
+
+
+        <h1 class="hero-title">
+
+          Lëvizni Lirisht.<br>
+
+          <span>
+            Eksploroni Më Shumë.
+          </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+          Makina premium, shërbim profesional
+          dhe çmime transparente për çdo
+          destinacion në Shqipëri.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+          <button
+            class="gold-btn"
+            onclick="openBooking()">
+
+            Rezervo Tani →
+
+          </button>
+
+
+          <button
+            class="outline-btn"
+            onclick="openModal('servicesModal')">
+
+            ▶ Shiko Shërbimet
+
+          </button>
+
+        </div>
+
+
+        <div class="trust-row">
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              🛡
+            </span>
+
+            <div>
+              <b>Siguri</b>
+              <small>
+                në çdo udhëtim
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              ◆
+            </span>
+
+            <div>
+              <b>Komoditet</b>
+              <small>
+                maksimal
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              €
+            </span>
+
+            <div>
+              <b>Çmime</b>
+              <small>
+                transparente
+              </small>
+            </div>
+
+          </div>
+
+
+          <div class="trust-item">
+
+            <span class="trust-icon">
+              ◷
+            </span>
+
+            <div>
+              <b>Mbështetje</b>
+              <small>
+                24/7 për klientët
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-car-wrap">
+
+          <div class="road-light"></div>
+
+          <img
+            class="hero-car"
+            src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1500&q=90"
+            alt="Makina premium Salianji Rent Car">
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH
+    ========================= -->
+
+    <section>
+
+      <div class="booking-panel">
+
+        <div class="booking-grid">
+
+          <div class="field">
+
+            <label>
+              📍 Vendndodhja
+            </label>
+
+            <select id="searchLocation">
+
+              <option>
+                Tiranë
+              </option>
+
+              <option>
+                Aeroporti i Rinasit
+              </option>
+
+              <option>
+                Durrës
+              </option>
+
+              <option>
+                Fier
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              📅 Data e marrjes
+            </label>
+
+            <input
+              id="searchStart"
+              type="datetime-local">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              📅 Data e kthimit
+            </label>
+
+            <input
+              id="searchEnd"
+              type="datetime-local">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              🚗 Kategoria
+            </label>
+
+            <select id="searchCategory">
+
+              <option value="Të gjitha">
+                Të gjitha
+              </option>
+
+              <option>
+                Ekonomike
+              </option>
+
+              <option>
+                Sedan
+              </option>
+
+              <option>
+                SUV
+              </option>
+
+              <option>
+                Premium
+              </option>
+
+              <option>
+                Sportive
+              </option>
+
+              <option>
+                7 Vende
+              </option>
+
+              <option>
+                Elektrike
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            class="search-btn"
+            onclick="searchCars()">
+
+            Kërko Makinën
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <section id="categories">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Kategoritë e
+              <span>Makinave</span>
+            </h2>
+
+            <p>
+              Zgjidh kategorinë që të përshtatet.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="categories-grid">
+
+          <div
+            class="category-card"
+            onclick="filterCars('Ekonomike')">
+
+            <img
+              src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80"
+              alt="Ekonomike">
+
+            <h3>
+              Ekonomike
+            </h3>
+
+            <p>
+              Nga €40 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('Sedan')">
+
+            <img
+              src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=600&q=80"
+              alt="Sedan">
+
+            <h3>
+              Sedan
+            </h3>
+
+            <p>
+              Nga €50 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('SUV')">
+
+            <img
+              src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=600&q=80"
+              alt="SUV">
+
+            <h3>
+              SUV
+            </h3>
+
+            <p>
+              Nga €70 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('Premium')">
+
+            <img
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80"
+              alt="Premium">
+
+            <h3>
+              Premium
+            </h3>
+
+            <p>
+              Nga €90 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('Sportive')">
+
+            <img
+              src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=600&q=80"
+              alt="Sportive">
+
+            <h3>
+              Sportive
+            </h3>
+
+            <p>
+              Nga €90 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('7 Vende')">
+
+            <img
+              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"
+              alt="7 Vende">
+
+            <h3>
+              7 Vende
+            </h3>
+
+            <p>
+              Nga €100 / ditë
+            </p>
+
+          </div>
+
+
+          <div
+            class="category-card"
+            onclick="filterCars('Elektrike')">
+
+            <img
+              src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=600&q=80"
+              alt="Elektrike">
+
+            <h3>
+              Elektrike
+            </h3>
+
+            <p>
+              Nga €60 / ditë
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CARS
+    ========================= -->
+
+    <section id="cars">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Makinat më të
+              <span>Rekomanduara</span>
+            </h2>
+
+            <p>
+              Zgjidh makinën dhe shiko detajet.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="cars-toolbar">
+
+          <button
+            class="filter-btn active"
+            onclick="filterCars('Të gjitha',this)">
+
+            Të gjitha
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('Ekonomike',this)">
+
+            Ekonomike
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('Sedan',this)">
+
+            Sedan
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('SUV',this)">
+
+            SUV
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('Premium',this)">
+
+            Premium
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('Sportive',this)">
+
+            Sportive
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('7 Vende',this)">
+
+            7 Vende
+
+          </button>
+
+          <button
+            class="filter-btn"
+            onclick="filterCars('Elektrike',this)">
+
+            Elektrike
+
+          </button>
+
+        </div>
+
+
+        <div
+          id="carsGrid"
+          class="cars-grid">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
+    <section id="services">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Shërbimet
+              <span>tona</span>
+            </h2>
+
+            <p>
+              Një eksperiencë e plotë udhëtimi.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="services-grid">
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              ✈
+            </div>
+
+            <h3>
+              Airport Transfer
+            </h3>
+
+            <p>
+              Transferim i sigurt nga dhe drejt aeroportit.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              🚘
+            </div>
+
+            <h3>
+              Makina me Shofer
+            </h3>
+
+            <p>
+              Shërbim profesional për udhëtime biznesi dhe private.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              📄
+            </div>
+
+            <h3>
+              Qira Afatgjatë
+            </h3>
+
+            <p>
+              Zgjidhje fleksibël për biznese dhe individë.
+            </p>
+
+          </div>
+
+
+          <div class="service-card">
+
+            <div class="service-icon">
+              🛡
+            </div>
+
+            <h3>
+              Sigurimi
+            </h3>
+
+            <p>
+              Opsione sigurimi për një udhëtim më të qetë.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         WHY US
+    ========================= -->
+
+    <section class="mountain-section">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Pse të zgjidhni
+              <span>Salianji Rent Car?</span>
+            </h2>
+
+            <p>
+              Shërbim profesional dhe rezervim i thjeshtë.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="benefits-grid">
+
+          <div class="benefit-card">
+
+            <div class="service-icon">
+              🚗
+            </div>
+
+            <h3>
+              Makina të mirëmbajtura
+            </h3>
+
+            <p>
+              Automjetet kontrollohen dhe mirëmbahen rregullisht.
+            </p>
+
+          </div>
+
+
+          <div class="benefit-card">
+
+            <div class="service-icon">
+              €
+            </div>
+
+            <h3>
+              Çmime transparente
+            </h3>
+
+            <p>
+              Çmimi tregohet qartë para rezervimit.
+            </p>
+
+          </div>
+
+
+          <div class="benefit-card">
+
+            <div class="service-icon">
+              🛡
+            </div>
+
+            <h3>
+              Siguri
+            </h3>
+
+            <p>
+              Fokus te siguria dhe komoditeti i klientit.
+            </p>
+
+          </div>
+
+
+          <div class="benefit-card">
+
+            <div class="service-icon">
+              🎧
+            </div>
+
+            <h3>
+              Mbështetje 24/7
+            </h3>
+
+            <p>
+              Mbështetje për klientët gjatë gjithë kohës.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section id="how-it-works">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Si
+              <span>funksionon?</span>
+            </h2>
+
+            <p>
+              Rezervo makinën në disa hapa.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+          <div class="step-card">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <h3>
+              Zgjidh makinën
+            </h3>
+
+            <p>
+              Shiko flotën dhe zgjidh automjetin.
+            </p>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <h3>
+              Zgjidh datat
+            </h3>
+
+            <p>
+              Vendos datën dhe orën e marrjes dhe kthimit.
+            </p>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <h3>
+              Plotëso të dhënat
+            </h3>
+
+            <p>
+              Vendos emrin, telefonin dhe emailin.
+            </p>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <div class="step-number">
+              04
+            </div>
+
+            <h3>
+              Konfirmo
+            </h3>
+
+            <p>
+              Rezervimi ruhet dhe mund të menaxhohet nga administratori.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
+
+    <section id="contact">
+
+      <div class="section-wrap">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Na
+              <span>Kontaktoni</span>
+            </h2>
+
+            <p>
+              Jemi këtu për t'ju ndihmuar.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+          <div class="contact-box">
+
+            <h3>
+              📞 Telefon
+            </h3>
+
+            <p>
+              +355 69 123 4567
+            </p>
+
+          </div>
+
+
+          <div class="contact-box">
+
+            <h3>
+              💬 WhatsApp
+            </h3>
+
+            <p>
+              +355 69 123 4567
+            </p>
+
+          </div>
+
+
+          <div class="contact-box">
+
+            <h3>
+              📍 Vendndodhja
+            </h3>
+
+            <p>
+              Tiranë, Shqipëri
+            </p>
+
+          </div>
+
+
+          <div class="contact-box">
+
+            <h3>
+              ✉ Email
+            </h3>
+
+            <p>
+              info@salianjirentcar.com
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       BOOKING MODAL
+  ========================= -->
+
+  <div
+    id="bookingModal"
+    class="modal-overlay">
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h2>
+          Rezervo makinën
+        </h2>
+
+        <button
+          class="close-modal"
+          onclick="closeModal('bookingModal')">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="modal-grid">
+
+        <div class="modal-field">
+
+          <label>
+            Makinë
+          </label>
+
+          <select id="bookingCar"></select>
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Emri dhe Mbiemri
+          </label>
+
+          <input
+            id="customerName"
+            type="text"
+            placeholder="Emri juaj">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Telefon
+          </label>
+
+          <input
+            id="customerPhone"
+            type="tel"
+            placeholder="+355...">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="customerEmail"
+            type="email"
+            placeholder="email@example.com">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Data dhe ora e marrjes
+          </label>
+
+          <input
+            id="bookingStart"
+            type="datetime-local">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Data dhe ora e kthimit
+          </label>
+
+          <input
+            id="bookingEnd"
+            type="datetime-local">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Vendndodhja
+          </label>
+
+          <select id="pickup">
+
+            <option>
+              Tiranë
+            </option>
+
+            <option>
+              Aeroporti i Rinasit
+            </option>
+
+            <option>
+              Durrës
+            </option>
+
+            <option>
+              Fier
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Totali
+          </label>
+
+          <input
+            id="bookingTotal"
+            type="text"
+            readonly>
+
+        </div>
+
+
+        <div class="modal-field full">
+
+          <label>
+            Shënime
+          </label>
+
+          <textarea
+            id="bookingNotes"
+            placeholder="Shënime shtesë..."></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="dark-btn"
+          onclick="closeModal('bookingModal')">
+
+          Mbyll
+
+        </button>
+
+
+        <button
+          class="modal-gold"
+          onclick="submitBooking()">
+
+          Konfirmo Rezervimin
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       LOGIN MODAL
+  ========================= -->
+
+  <div
+    id="authModal"
+    class="modal-overlay">
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h2>
+          Hyrje / Regjistrim
+        </h2>
+
+        <button
+          class="close-modal"
+          onclick="closeModal('authModal')">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="modal-grid">
+
+        <div class="modal-field full">
+
+          <label>
+            Emri
+          </label>
+
+          <input
+            id="authName"
+            type="text"
+            placeholder="Emri dhe mbiemri">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="authEmail"
+            type="text"
+            placeholder="Email ose admin">
+
+        </div>
+
+
+        <div class="modal-field">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            id="authPassword"
+            type="password"
+            placeholder="••••••••">
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="dark-btn"
+          onclick="registerUser()">
+
+          Regjistrohu
+
+        </button>
+
+
+        <button
+          class="modal-gold"
+          onclick="loginUser()">
+
+          Hyr
+
+        </button>
+
+      </div>
+
+
+      <p style="
+        margin-top:15px;
+        color:#7f8993;
+        font-size:12px;
+      ">
+
+        Për administratorin përdor:
+        <br>
+        <b style="color:#e0bd4f;">
+          admin
+        </b>
+        /
+        <b style="color:#e0bd4f;">
+          123456
+        </b>
+
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SERVICES MODAL
+  ========================= -->
+
+  <div
+    id="servicesModal"
+    class="modal-overlay">
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h2>
+          Shërbimet Salianji Rent Car
+        </h2>
+
+        <button
+          class="close-modal"
+          onclick="closeModal('servicesModal')">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="service-modal-grid">
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            ✈
+          </div>
+
+          <h3>
+            Airport Transfer
+          </h3>
+
+          <p>
+            Transferim nga dhe drejt aeroportit të Rinasit.
+          </p>
+
+        </div>
+
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            🚘
+          </div>
+
+          <h3>
+            Makina me Shofer
+          </h3>
+
+          <p>
+            Shërbim profesional për udhëtime private dhe biznesi.
+          </p>
+
+        </div>
+
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            📄
+          </div>
+
+          <h3>
+            Qira Afatgjatë
+          </h3>
+
+          <p>
+            Zgjidhje fleksibël për periudha më të gjata.
+          </p>
+
+        </div>
+
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            🛡
+          </div>
+
+          <h3>
+            Sigurimi
+          </h3>
+
+          <p>
+            Opsione sigurimi për më shumë qetësi.
+          </p>
+
+        </div>
+
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            🎧
+          </div>
+
+          <h3>
+            Mbështetje 24/7
+          </h3>
+
+          <p>
+            Mbështetje për klientët gjatë gjithë kohës.
+          </p>
+
+        </div>
+
+
+        <div class="service-open-card">
+
+          <div class="service-icon">
+            🔄
+          </div>
+
+          <h3>
+            Marrje & Kthim
+          </h3>
+
+          <p>
+            Marrje dhe kthim fleksibël sipas rezervimit.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       DETAILS MODAL
+  ========================= -->
+
+  <div
+    id="detailsModal"
+    class="modal-overlay">
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h2 id="detailsTitle">
+          Detajet e makinës
+        </h2>
+
+        <button
+          class="close-modal"
+          onclick="closeModal('detailsModal')">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div id="detailsContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ADMIN PANEL
+  ========================= -->
+
+  <div
+    id="adminModal"
+    class="modal-overlay">
+
+    <div class="modal-box admin-panel">
+
+      <div class="modal-head">
+
+        <div>
+
+          <h2>
+            ⚙️ Admin Dashboard
+          </h2>
+
+          <p style="
+            color:#89929d;
+            margin-top:5px;
+          ">
+            Salianji Rent Car
+          </p>
+
+        </div>
+
+
+        <button
+          class="close-modal"
+          onclick="closeModal('adminModal')">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <div class="admin-stats">
+
+        <div class="admin-stat">
+
+          <small>
+            Makinat
+          </small>
+
+          <strong id="adminCarsCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+          <small>
+            Rezervime
+          </small>
+
+          <strong id="adminBookingsCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+          <small>
+            Në pritje
+          </small>
+
+          <strong id="adminPendingCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="admin-stat">
+
+          <small>
+            Të anuluara
+          </small>
+
+          <strong id="adminCancelledCount">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- BOOKINGS -->
+
+      <div class="admin-section">
+
+        <h3>
+          📋 Rezervimet
+        </h3>
+
+
+        <div
+          id="adminBookings"
+          class="admin-table-wrap">
+
+        </div>
+
+      </div>
+
+
+      <!-- ADMIN ACTIONS -->
+
+      <div class="modal-actions">
+
+        <button
+          class="dark-btn"
+          onclick="refreshAdmin()">
+
+          🔄 Rifresko
+
+        </button>
+
+
+        <button
+          class="dark-btn"
+          onclick="logoutAdmin()">
+
+          Dil nga Admin
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div
+    id="toast"
+    class="toast">
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       MAKINAT
+    ========================= */
+
+    const cars = [
+
+      {
+        id: 1,
+        name: "Volkswagen Golf 7",
+        category: "Ekonomike",
+        year: 2017,
+        price: 40,
+        engine: "1.6",
+        fuel: "Naftë",
+        gear: "Manual",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1000&q=85",
+        description: "Makine praktike dhe ekonomike për qytet dhe udhëtime të përditshme."
+      },
+
+      {
+        id: 2,
+        name: "BMW X5",
+        category: "SUV",
+        year: 2019,
+        price: 80,
+        engine: "3.0",
+        fuel: "Naftë",
+        gear: "Automatik",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85",
+        description: "BMW X5 premium me komoditet të lartë dhe performancë të fuqishme."
+      },
+
+      {
+        id: 3,
+        name: "Audi Q7",
+        category: "SUV",
+        year: 2021,
+        price: 90,
+        engine: "3.0 TDI",
+        fuel: "Naftë",
+        gear: "Automatik",
+        seats: 7,
+        available: true,
+        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85",
+        description: "Audi Q7 premium me hapësirë të madhe dhe 7 vende."
+      },
+
+      {
+        id: 4,
+        name: "Mercedes-Benz E-Class",
+        category: "Sedan",
+        year: 2020,
+        price: 70,
+        engine: "2.0",
+        fuel: "Naftë",
+        gear: "Automatik",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=85",
+        description: "Mercedes-Benz E-Class elegant për biznes dhe udhëtime personale."
+      },
+
+      {
+        id: 5,
+        name: "BMW 5 Series",
+        category: "Premium",
+        year: 2020,
+        price: 75,
+        engine: "2.0",
+        fuel: "Naftë",
+        gear: "Automatik",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1000&q=85",
+        description: "BMW 5 Series me teknologji moderne dhe komoditet."
+      },
+
+      {
+        id: 6,
+        name: "Mercedes G-Class",
+        category: "Premium",
+        year: 2021,
+        price: 150,
+        engine: "4.0",
+        fuel: "Benzinë",
+        gear: "Automatik",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&w=1000&q=85",
+        description: "Mercedes G-Class luksoz me performancë të lartë."
+      },
+
+      {
+        id: 7,
+        name: "Porsche 911",
+        category: "Sportive",
+        year: 2022,
+        price: 180,
+        engine: "3.0",
+        fuel: "Benzinë",
+        gear: "Automatik",
+        seats: 2,
+        available: true,
+        image: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1000&q=85",
+        description: "Porsche 911 sportive për një eksperiencë premium."
+      },
+
+      {
+        id: 8,
+        name: "Mercedes V-Class",
+        category: "7 Vende",
+        year: 2021,
+        price: 100,
+        engine: "2.0",
+        fuel: "Naftë",
+        gear: "Automatik",
+        seats: 7,
+        available: true,
+        image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85",
+        description: "Mercedes V-Class ideal për familje, grupe dhe transferta."
+      },
+
+      {
+        id: 9,
+        name: "Tesla Model 3",
+        category: "Elektrike",
+        year: 2022,
+        price: 65,
+        engine: "Electric",
+        fuel: "Elektrike",
+        gear: "Automatik",
+        seats: 5,
+        available: true,
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1000&q=85",
+        description: "Tesla Model 3 modern, elektrik dhe ekonomik."
+      }
+
+    ];
+
+
+    let selectedCategory = "Të gjitha";
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 3000);
+
+    }
+
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    function openModal(id) {
+
+      const modal =
+        document.getElementById(id);
+
+      if (modal) {
+        modal.classList.add("show");
+      }
+
+    }
+
+
+    function closeModal(id) {
+
+      const modal =
+        document.getElementById(id);
+
+      if (modal) {
+        modal.classList.remove("show");
+      }
+
+    }
+
+
+    window.addEventListener("click", function(e) {
+
+      if (
+        e.target.classList.contains("modal-overlay")
+      ) {
+
+        e.target.classList.remove("show");
+
+      }
+
+    });
+
+
+    /* =========================
+       SCROLL
+    ========================= */
+
+    function scrollToSection(id) {
+
+      document
+        .getElementById(id)
+        ?.scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       RENDER CARS
+    ========================= */
+
+    function renderCars(list = cars) {
+
+      const grid =
+        document.getElementById("carsGrid");
+
+
+      if (!list.length) {
+
+        grid.innerHTML =
+          '<p style="color:#9ca3af;">Nuk u gjetën makina në këtë kategori.</p>';
+
+        return;
+
+      }
+
+
+      grid.innerHTML = list.map(car => `
+
+        <article class="car-card">
+
+          <div class="car-image-wrap">
+
+            <img
+              src="${car.image}"
+              alt="${car.name}">
+
+            <span class="availability">
+
+              ${car.available
+                ? "Disponueshme"
+                : "E zënë"}
+
+            </span>
+
+          </div>
+
+
+          <div class="car-body">
+
+            <h3>
+              ${car.name}
+            </h3>
+
+
+            <div class="car-meta">
+
+              <span>
+                ⛽ ${car.fuel}
+              </span>
+
+              <span>
+                ⚙ ${car.gear}
+              </span>
+
+              <span>
+                👥 ${car.seats} vende
+              </span>
+
+              <span>
+                📅 ${car.year}
+              </span>
+
+            </div>
+
+
+            <p>
+              ${car.description}
+            </p>
+
+
+            <div class="car-footer">
+
+              <div class="price">
+
+                €${car.price}
+
+                <small>
+                  / ditë
+                </small>
+
+              </div>
+
+
+              <div style="
+                display:flex;
+                gap:6px;
+              ">
+
+                <button
+                  class="filter-btn"
+                  onclick="showDetails(${car.id})">
+
+                  Detaje
+
+                </button>
+
+
+                <button
+                  class="reserve-small"
+                  onclick="openBooking(${car.id})">
+
+                  Rezervo
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      `).join("");
+
+    }
+
+
+    /* =========================
+       FILTER
+    ========================= */
+
+    function filterCars(
+      category,
+      button = null
+    ) {
+
+      selectedCategory = category;
+
+
+      document
+        .querySelectorAll(".cars-toolbar .filter-btn")
+        .forEach(btn => {
+
+          btn.classList.remove("active");
+
+        });
+
+
+      if (button) {
+
+        button.classList.add("active");
+
+      }
+
+
+      const filtered =
+        category === "Të gjitha"
+          ? cars
+          : cars.filter(
+              car => car.category === category
+            );
+
+
+      renderCars(filtered);
+
+
+      document
+        .getElementById("cars")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchCars() {
+
+      const category =
+        document.getElementById(
+          "searchCategory"
+        ).value;
+
+
+      filterCars(category);
+
+
+      showToast(
+        category === "Të gjitha"
+          ? "Po shfaqim të gjitha makinat."
+          : `Po shfaqim kategorinë ${category}.`
+      );
+
+    }
+
+
+    /* =========================
+       CAR DETAILS
+    ========================= */
+
+    function showDetails(id) {
+
+      const car =
+        cars.find(c => c.id === id);
+
+
+      if (!car) return;
+
+
+      document.getElementById(
+        "detailsTitle"
+      ).textContent = car.name;
+
+
+      document.getElementById(
+        "detailsContent"
+      ).innerHTML = `
+
+        <img
+          src="${car.image}"
+          alt="${car.name}"
+          style="
+            width:100%;
+            height:280px;
+            object-fit:cover;
+            border-radius:12px;
+            margin-bottom:18px;
+          ">
+
+
+        <h3 style="
+          color:#e0bd4f;
+          font-size:25px;
+        ">
+
+          €${car.price} / ditë
+
+        </h3>
+
+
+        <p style="
+          color:#9ca3af;
+          margin:12px 0 20px;
+          line-height:1.7;
+        ">
+
+          ${car.description}
+
+        </p>
+
+
+        <div style="
+          display:grid;
+          grid-template-columns:repeat(2,1fr);
+          gap:10px;
+        ">
+
+          <div class="service-open-card">
+            📅 ${car.year}
+          </div>
+
+          <div class="service-open-card">
+            ⛽ ${car.fuel}
+          </div>
+
+          <div class="service-open-card">
+            ⚙ ${car.gear}
+          </div>
+
+          <div class="service-open-card">
+            👥 ${car.seats} vende
+          </div>
+
+          <div class="service-open-card">
+            🚗 ${car.category}
+          </div>
+
+          <div class="service-open-card">
+            ✓ ${car.available
+              ? "Disponueshme"
+              : "E zënë"}
+          </div>
+
+        </div>
+
+
+        <div style="
+          margin-top:20px;
+        ">
+
+          <button
+            class="gold-btn"
+            onclick="
+              closeModal('detailsModal');
+              openBooking(${car.id});
+            ">
+
+            Rezervo këtë makinë →
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      openModal("detailsModal");
+
+    }
+
+
+    /* =========================
+       BOOKING
+    ========================= */
+
+    function openBooking(carId = null) {
+
+      const select =
+        document.getElementById(
+          "bookingCar"
+        );
+
+
+      select.innerHTML =
+        cars.map(car => `
+
+          <option
+            value="${car.id}"
+            ${car.id === carId
+              ? "selected"
+              : ""}>
+
+            ${car.name} -
+            €${car.price}/ditë
+
+          </option>
+
+        `).join("");
+
+
+      const now =
+        new Date();
+
+
+      const tomorrow =
+        new Date(
+          now.getTime() +
+          24 * 60 * 60 * 1000
+        );
+
+
+      const after =
+        new Date(
+          tomorrow.getTime() +
+          3 * 24 * 60 * 60 * 1000
+        );
+
+
+      document.getElementById(
+        "bookingStart"
+      ).value =
+        toLocalDateTime(tomorrow);
+
+
+      document.getElementById(
+        "bookingEnd"
+      ).value =
+        toLocalDateTime(after);
+
+
+      updateBookingTotal();
+
+
+      openModal("bookingModal");
+
+    }
+
+
+    function toLocalDateTime(date) {
+
+      const pad =
+        n => String(n).padStart(2,"0");
+
+
+      return (
+
+        date.getFullYear()
+        + "-"
+        + pad(date.getMonth()+1)
+        + "-"
+        + pad(date.getDate())
+        + "T"
+        + pad(date.getHours())
+        + ":"
+        + pad(date.getMinutes())
+
+      );
+
+    }
+
+
+    function calculateDays() {
+
+      const start =
+        new Date(
+          document.getElementById(
+            "bookingStart"
+          ).value
+        );
+
+
+      const end =
+        new Date(
+          document.getElementById(
+            "bookingEnd"
+          ).value
+        );
+
+
+      if (
+        isNaN(start) ||
+        isNaN(end) ||
+        end <= start
+      ) {
+
+        return 0;
+
+      }
+
+
+      return Math.ceil(
+        (end - start) /
+        (1000 * 60 * 60 * 24)
+      );
+
+    }
+
+
+    function updateBookingTotal() {
+
+      const carId =
+        Number(
+          document.getElementById(
+            "bookingCar"
+          ).value
+        );
+
+
+      const car =
+        cars.find(
+          c => c.id === carId
+        );
+
+
+      const days =
+        calculateDays();
+
+
+      document.getElementById(
+        "bookingTotal"
+      ).value =
+
+        car && days > 0
+
+          ? `€${car.price * days} (${days} ditë)`
+
+          : "—";
+
+    }
+
+
+    document
+      .getElementById("bookingCar")
+      .addEventListener(
+        "change",
+        updateBookingTotal
+      );
+
+
+    document
+      .getElementById("bookingStart")
+      .addEventListener(
+        "change",
+        updateBookingTotal
+      );
+
+
+    document
+      .getElementById("bookingEnd")
+      .addEventListener(
+        "change",
+        updateBookingTotal
+      );
+
+
+    /* =========================
+       SUBMIT BOOKING
+    ========================= */
+
+    function submitBooking() {
+
+      const name =
+        document.getElementById(
+          "customerName"
+        ).value.trim();
+
+
+      const phone =
+        document.getElementById(
+          "customerPhone"
+        ).value.trim();
+
+
+      const email =
+        document.getElementById(
+          "customerEmail"
+        ).value.trim();
+
+
+      const carId =
+        Number(
+          document.getElementById(
+            "bookingCar"
+          ).value
+        );
+
+
+      const start =
+        document.getElementById(
+          "bookingStart"
+        ).value;
+
+
+      const end =
+        document.getElementById(
+          "bookingEnd"
+        ).value;
+
+
+      const pickup =
+        document.getElementById(
+          "pickup"
+        ).value;
+
+
+      const notes =
+        document.getElementById(
+          "bookingNotes"
+        ).value.trim();
+
+
+      if (
+        !name ||
+        !phone ||
+        !email ||
+        !start ||
+        !end
+      ) {
+
+        showToast(
+          "Plotëso të gjitha fushat kryesore."
+        );
+
+        return;
+
+      }
+
+
+      const days =
+        calculateDays();
+
+
+      if (days <= 0) {
+
+        showToast(
+          "Data e kthimit duhet të jetë pas datës së marrjes."
+        );
+
+        return;
+
+      }
+
+
+      const car =
+        cars.find(
+          c => c.id === carId
+        );
+
+
+      if (!car) {
+
+        showToast(
+          "Makina nuk u gjet."
+        );
+
+        return;
+
+      }
+
+
+      const booking = {
+
+        id: Date.now(),
+
+        customerName:
+          name,
+
+        phone:
+          phone,
+
+        email:
+          email,
+
+        carId:
+          carId,
+
+        carName:
+          car.name,
+
+        start:
+          start,
+
+        end:
+          end,
+
+        pickup:
+          pickup,
+
+        notes:
+          notes,
+
+        total:
+          car.price * days,
+
+        createdAt:
+          new Date().toISOString(),
+
+        status:
+          "Në pritje"
+
+      };
+
+
+      const bookings =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_bookings"
+          ) || "[]"
+        );
+
+
+      bookings.push(
+        booking
+      );
+
+
+      localStorage.setItem(
+        "salianji_bookings",
+        JSON.stringify(bookings)
+      );
+
+
+      closeModal(
+        "bookingModal"
+      );
+
+
+      showToast(
+        "Rezervimi u dërgua me sukses!"
+      );
+
+
+      document.getElementById(
+        "customerName"
+      ).value = "";
+
+
+      document.getElementById(
+        "customerPhone"
+      ).value = "";
+
+
+      document.getElementById(
+        "customerEmail"
+      ).value = "";
+
+
+      document.getElementById(
+        "bookingNotes"
+      ).value = "";
+
+
+      refreshAdmin();
+
+    }
+
+
+    /* =========================
+       REGISTER
+    ========================= */
+
+    function registerUser() {
+
+      const name =
+        document.getElementById(
+          "authName"
+        ).value.trim();
+
+
+      const email =
+        document.getElementById(
+          "authEmail"
+        ).value.trim();
+
+
+      const password =
+        document.getElementById(
+          "authPassword"
+        ).value;
+
+
+      if (
+        !name ||
+        !email ||
+        !password
+      ) {
+
+        showToast(
+          "Plotëso të gjitha fushat."
+        );
+
+        return;
+
+      }
+
+
+      if (email === "admin") {
+
+        showToast(
+          "Ky përdorues është rezervuar për administratorin."
+        );
+
+        return;
+
+      }
+
+
+      const users =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_users"
+          ) || "[]"
+        );
+
+
+      if (
+        users.some(
+          user => user.email === email
+        )
+      ) {
+
+        showToast(
+          "Ky email ekziston."
+        );
+
+        return;
+
+      }
+
+
+      users.push({
+
+        id:
+          Date.now(),
+
+        name:
+          name,
+
+        email:
+          email,
+
+        password:
+          password,
+
+        role:
+          "user"
+
+      });
+
+
+      localStorage.setItem(
+        "salianji_users",
+        JSON.stringify(users)
+      );
+
+
+      showToast(
+        "Llogaria u krijua me sukses."
+      );
+
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    function loginUser() {
+
+      const email =
+        document.getElementById(
+          "authEmail"
+        ).value.trim();
+
+
+      const password =
+        document.getElementById(
+          "authPassword"
+        ).value;
+
+
+      /* ADMIN */
+
+      if (
+        email === "admin" &&
+        password === "123456"
+      ) {
+
+        const admin = {
+
+          name:
+            "Administrator",
+
+          email:
+            "admin",
+
+          role:
+            "admin"
+
+        };
+
+
+        localStorage.setItem(
+          "salianji_current_user",
+          JSON.stringify(admin)
+        );
+
+
+        closeModal(
+          "authModal"
+        );
+
+
+        showToast(
+          "U identifikuat si administrator."
+        );
+
+
+        setTimeout(
+          () => {
+
+            openAdmin();
+
+          },
+          500
+        );
+
+
+        return;
+
+      }
+
+
+      /* USER */
+
+      const users =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_users"
+          ) || "[]"
+        );
+
+
+      const user =
+        users.find(
+          u =>
+            u.email === email &&
+            u.password === password
+        );
+
+
+      if (!user) {
+
+        showToast(
+          "Email ose password i gabuar."
+        );
+
+        return;
+
+      }
+
+
+      localStorage.setItem(
+        "salianji_current_user",
+        JSON.stringify(user)
+      );
+
+
+      closeModal(
+        "authModal"
+      );
+
+
+      showToast(
+        `Mirë se erdhe, ${user.name}!`
+      );
+
+    }
+
+
+    /* =========================
+       OPEN ADMIN
+    ========================= */
+
+    function openAdmin() {
+
+      const currentUser =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_current_user"
+          ) || "null"
+        );
+
+
+      if (
+        currentUser &&
+        currentUser.role === "admin"
+      ) {
+
+        refreshAdmin();
+
+        openModal(
+          "adminModal"
+        );
+
+        return;
+
+      }
+
+
+      openModal(
+        "authModal"
+      );
+
+
+      showToast(
+        "Hyr me llogarinë e administratorit."
+      );
+
+    }
+
+
+    /* =========================
+       ADMIN DASHBOARD
+    ========================= */
+
+    function refreshAdmin() {
+
+      const bookings =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_bookings"
+          ) || "[]"
+        );
+
+
+      const pending =
+        bookings.filter(
+          b => b.status === "Në pritje"
+        );
+
+
+      const cancelled =
+        bookings.filter(
+          b => b.status === "Anuluar"
+        );
+
+
+      document.getElementById(
+        "adminCarsCount"
+      ).textContent =
+        cars.length;
+
+
+      document.getElementById(
+        "adminBookingsCount"
+      ).textContent =
+        bookings.length;
+
+
+      document.getElementById(
+        "adminPendingCount"
+      ).textContent =
+        pending.length;
+
+
+      document.getElementById(
+        "adminCancelledCount"
+      ).textContent =
+        cancelled.length;
+
+
+      const container =
+        document.getElementById(
+          "adminBookings"
+        );
+
+
+      if (!bookings.length) {
+
+        container.innerHTML = `
+
+          <div class="admin-empty">
+
+            Nuk ka ende rezervime.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML = `
+
+        <table class="admin-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Klienti
+              </th>
+
+              <th>
+                Makina
+              </th>
+
+              <th>
+                Marrja
+              </th>
+
+              <th>
+                Kthimi
+              </th>
+
+              <th>
+                Totali
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Veprim
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            ${bookings.map(
+              booking => `
+
+              <tr>
+
+                <td>
+
+                  <strong>
+                    ${escapeHtml(
+                      booking.customerName
+                    )}
+                  </strong>
+
+                  <br>
+
+                  <small>
+                    ${escapeHtml(
+                      booking.phone
+                    )}
+                  </small>
+
+                  <br>
+
+                  <small>
+                    ${escapeHtml(
+                      booking.email
+                    )}
+                  </small>
+
+                </td>
+
+
+                <td>
+
+                  ${escapeHtml(
+                    booking.carName
+                  )}
+
+                </td>
+
+
+                <td>
+
+                  ${formatDate(
+                    booking.start
+                  )}
+
+                </td>
+
+
+                <td>
+
+                  ${formatDate(
+                    booking.end
+                  )}
+
+                </td>
+
+
+                <td>
+
+                  €${booking.total}
+
+                </td>
+
+
+                <td>
+
+                  <span class="
+                    admin-status
+                    ${booking.status === "Anuluar"
+                      ? "cancelled"
+                      : ""}
+                  ">
+
+                    ${booking.status}
+
+                  </span>
+
+                </td>
+
+
+                <td>
+
+                  ${
+                    booking.status !== "Anuluar"
+
+                    ? `
+
+                      <button
+                        class="admin-danger"
+                        onclick="cancelAdminBooking(${booking.id})">
+
+                        Anulo
+
+                      </button>
+
+                    `
+
+                    : "—"
+                  }
+
+                </td>
+
+              </tr>
+
+            `
+            ).join("")}
+
+          </tbody>
+
+        </table>
+
+      `;
+
+    }
+
+
+    /* =========================
+       ADMIN CANCEL
+    ========================= */
+
+    function cancelAdminBooking(id) {
+
+      const bookings =
+        JSON.parse(
+          localStorage.getItem(
+            "salianji_bookings"
+          ) || "[]"
+        );
+
+
+      const booking =
+        bookings.find(
+          b => b.id === id
+        );
+
+
+      if (!booking) return;
+
+
+      booking.status =
+        "Anuluar";
+
+
+      localStorage.setItem(
+        "salianji_bookings",
+        JSON.stringify(bookings)
+      );
+
+
+      refreshAdmin();
+
+
+      showToast(
+        "Rezervimi u anulua."
+      );
+
+    }
+
+
+    /* =========================
+       LOGOUT ADMIN
+    ========================= */
+
+    function logoutAdmin() {
+
+      localStorage.removeItem(
+        "salianji_current_user"
+      );
+
+
+      closeModal(
+        "adminModal"
+      );
+
+
+      showToast(
+        "Dolët nga Admin."
+      );
+
+    }
+
+
+    /* =========================
+       FORMAT DATE
+    ========================= */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "—";
+      }
+
+
+      const date =
+        new Date(value);
+
+
+      if (isNaN(date)) {
+        return value;
+      }
+
+
+      return date.toLocaleString(
+        "sq-AL",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+
+    }
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================= */
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(
+          /[&<>"']/g,
+          function(m) {
+
+            return {
+
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#039;"
+
+            }[m];
+
+          }
+        );
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    renderCars(cars);
+
+  </script>
+
+</body>
+</html>
